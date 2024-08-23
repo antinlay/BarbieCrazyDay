@@ -4,12 +4,14 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string></string>
+		<string>CherryBombOne-Regular.ttf</string>
 	</array>
 	<key>UILaunchScreen</key>
 	<dict>
+		<key>UIImageRespectsSafeAreaInsets</key>
+		<false/>
 		<key>UIImageName</key>
-		<string>Loading.png</string>
+		<string>Loading</string>
 	</dict>
 </dict>
 </plist>
