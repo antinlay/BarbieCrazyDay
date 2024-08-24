@@ -8,11 +8,20 @@
 import SwiftUI
 
 extension Color {
-    static var actionGradient: LinearGradient {
+    static var descriptionGradient: LinearGradient {
         LinearGradient(
             gradient: Gradient(colors: [Color(#colorLiteral(red: 0.495, green: 0, blue: 0.883, alpha: 1)), Color(#colorLiteral(red: 0.889, green: 0, blue: 0.967, alpha: 1))]),
             startPoint: .top,
             endPoint: .bottom
+        )
+    }
+    
+    static var vignetteGradient: RadialGradient {
+        RadialGradient(
+            gradient: Gradient(colors: [Color.clear, Color(#colorLiteral(red: 0.495, green: 0, blue: 0.883, alpha: 1))]),
+            center: .center,
+            startRadius: 0,
+            endRadius: 66
         )
     }
 }

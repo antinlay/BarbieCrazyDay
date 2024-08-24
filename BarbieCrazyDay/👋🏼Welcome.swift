@@ -8,6 +8,22 @@
 import SwiftUI
 
 struct Welcome: View {
+    let step = """
+                Step into a world where each step leads you on an
+                epic journey filled with thrilling challenges,
+                mysterious artifacts, and dynamic weather-themed
+                games. Ready to test your luck and strategy? Join
+                us for an unforgettable adventure where every
+                choice matters and every game is a new quest.
+                Let's play and make today legendary!
+               """
+    let remember = """
+                    Remember, it's all in good fun — no real money
+                    involved. Let the whimsy and a touch of strategic
+                    mischief guide you through this
+                    laughter-serious epic!
+                   """
+    
     var body: some View {
         ZStack {
             Image(.Welcome.barbie)
@@ -31,15 +47,24 @@ struct Welcome: View {
                 .modifier(AlignmentPosition(.topTrailing))
                 .padding(.top, 165)
                 .padding(.trailing, 20)
-            RoundedRectangle(cornerRadius: 33)
-                .fill(Color.actionGradient.opacity(0.65))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 33)
-                        .stroke(.white, style: StrokeStyle(lineWidth: 7, lineCap: .round, lineJoin: .round, dash: [10, 15]))
-                    )
-                .frame(maxWidth: .infinity, maxHeight: 142)
-                .padding(.horizontal)
-
+            VStack {
+                Image(.Welcome.step)
+                    .overlay {
+                        Text(step)
+                            .font(.cherryBombOne(.regular, size: 13))
+                            .foregroundStyle(.white)
+                            .multilineTextAlignment(.center)
+                    }
+                Image(.Welcome.remember)
+                    .overlay {
+                        Text(remember)
+                            .font(.cherryBombOne(.regular, size: 13))
+                            .foregroundStyle(.white)
+                            .multilineTextAlignment(.center)
+                    }
+                Image(.Welcome.start)
+            }.modifier(AlignmentPosition(.bottom))
+                .padding(.bottom, 44)
         }.modifier(AppBackground(.Welcome.background))
     }
 }
