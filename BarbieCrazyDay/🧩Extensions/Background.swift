@@ -16,6 +16,6 @@ struct AppBackground: ViewModifier {
     
     func body(content: Content) -> some View {
         content
-            .background { Image(imageResource).resizable() }.ignoresSafeArea()
+            .background { Image(imageResource).resizable().ignoresSafeArea() }
     }
 }
