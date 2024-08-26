@@ -12,6 +12,7 @@
 		5C0780E72C790782002C7F54 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0780E62C790782002C7F54 /* Color.swift */; };
 		5C0780E92C7A55BE002C7F54 /* 💠Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0780E82C7A55BE002C7F54 /* 💠Menu.swift */; };
 		5C0780EC2C7B15F3002C7F54 /* DefaultStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0780EB2C7B15F3002C7F54 /* DefaultStorage.swift */; };
+		5C0780F02C7D0E1A002C7F54 /* ℹ️Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0780EF2C7D0E1A002C7F54 /* ℹ️Info.swift */; };
 		5C45B1CB2C78C75C00628C16 /* BarbieCrazyDayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C45B1CA2C78C75C00628C16 /* BarbieCrazyDayApp.swift */; };
 		5C45B1CD2C78C75C00628C16 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C45B1CC2C78C75C00628C16 /* ContentView.swift */; };
 		5C45B1CF2C78C75D00628C16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C45B1CE2C78C75D00628C16 /* Assets.xcassets */; };
@@ -27,6 +28,7 @@
 		5C0780E62C790782002C7F54 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		5C0780E82C7A55BE002C7F54 /* 💠Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "💠Menu.swift"; sourceTree = "<group>"; };
 		5C0780EB2C7B15F3002C7F54 /* DefaultStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStorage.swift; sourceTree = "<group>"; };
+		5C0780EF2C7D0E1A002C7F54 /* ℹ️Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ℹ️Info.swift"; sourceTree = "<group>"; };
 		5C45B1C72C78C75C00628C16 /* BarbieCrazyDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BarbieCrazyDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C45B1CA2C78C75C00628C16 /* BarbieCrazyDayApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarbieCrazyDayApp.swift; sourceTree = "<group>"; };
 		5C45B1CC2C78C75C00628C16 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				5C842E7E2C78D2C300103584 /* Info.plist */,
 				5C842E792C78CDB300103584 /* 👋🏼Welcome.swift */,
 				5C0780E82C7A55BE002C7F54 /* 💠Menu.swift */,
+				5C0780EF2C7D0E1A002C7F54 /* ℹ️Info.swift */,
 				5C45B1CA2C78C75C00628C16 /* BarbieCrazyDayApp.swift */,
 				5C45B1CC2C78C75C00628C16 /* ContentView.swift */,
 				5C0780EA2C7B15D0002C7F54 /* ⚙️Services */,
@@ -207,6 +210,7 @@
 				5C45B1CD2C78C75C00628C16 /* ContentView.swift in Sources */,
 				5C0780E92C7A55BE002C7F54 /* 💠Menu.swift in Sources */,
 				5C45B1CB2C78C75C00628C16 /* BarbieCrazyDayApp.swift in Sources */,
+				5C0780F02C7D0E1A002C7F54 /* ℹ️Info.swift in Sources */,
 				5C0780E72C790782002C7F54 /* Color.swift in Sources */,
 				5C0780EC2C7B15F3002C7F54 /* DefaultStorage.swift in Sources */,
 				5C0780DF2C7900B4002C7F54 /* Custom.swift in Sources */,

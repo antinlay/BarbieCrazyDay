@@ -23,6 +23,7 @@ struct Menu: View {
     
     private var infoButton: some View {
         Button {
+            
             // navigate to Info some view
         } label: {
             Image(.Menu.info)
