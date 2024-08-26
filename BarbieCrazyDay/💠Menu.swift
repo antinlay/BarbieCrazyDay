@@ -8,13 +8,18 @@
 import SwiftUI
 
 struct Menu: View {
-    @State private var dailyReward = 500
+    @State private var reward = 500
     @State private var nowReward = 300
     @State private var wallet: Int = 10000
-    @State private var dateUntil: Date?
-    @State private var isDisabled: Bool = false
+    @State private var dateUntil: Date = .now
+    @State private var isDisabledNowReward: Bool = true
+    @State private var isDisabledReward: Bool = true
+    
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     private var defaultStorage = DefaultStorage()
+    
+    private var isTimerStopped: Bool { dateUntil < Date.now }
     
     private var infoButton: some View {
         Button {
@@ -37,13 +42,25 @@ struct Menu: View {
             }
     }
     
+    private var takeButton: some View {
+        Button {
+            getReward()
+        } label: {
+            Image(.Menu.takeNowButton)
+                .overlay {
+                    Text("TAKE")
+                        .font(.cherryBombOne(.regular, size: 9))
+                        .foregroundStyle(.white)
+                        .shadow(color: .fontShadow, radius: 4, x: 0, y: 4)
+                }
+        }
+        .disabled(isDisabledReward)
+        .opacity(isDisabledReward ? .zero : 1)
+    }
+    
     private var takeNowButton: some View {
         Button {
-            if let dateFuture = Calendar.current.date(byAdding: .hour, value: 14, to: .now) {
-                defaultStorage.saveDate(dateFuture)
-                dateUntil = defaultStorage.loadDate()
-                wallet += nowReward
-            }
+            getRewardNow()
         } label: {
             Image(.Menu.takeNowButton)
                 .overlay {
@@ -63,30 +80,52 @@ struct Menu: View {
                     .padding(.bottom, 3)
                 }
         }
-        .disabled(isDisabled)
-        .onChange(of: dateUntil) { newValue in
-            let components = Calendar.current.dateComponents([.hour], from: .now, to: defaultStorage.loadDate() ?? .now)
-            print(components.hour)
-            isDisabled = components.hour ?? 0 > 12
+        .disabled(isDisabledNowReward)
+        .opacity(isDisabledNowReward ? .zero : 1)
+    }
+
+    private func getReward() {
+        withAnimation {
+            if let dateFuture = Calendar.current.date(byAdding: .hour, value: 12, to: .now) {
+                defaultStorage.saveRewardModel(RewardModel(dailyDate: dateFuture))
+                dateUntil = dateFuture
+                wallet += reward
+                isDisabledReward = true
+            }
+        }
+    }
+    
+    private func getRewardNow() {
+        withAnimation {
+            defaultStorage.saveRewardNowModel(RewardNowModel(nowReward: true))
+            wallet += nowReward
+            isDisabledNowReward = true
         }
     }
     
     private var timeBoard: some View {
         Image(.Menu.timeBoard)
             .overlay(alignment: .bottom) {
-                takeNowButton
-                    .padding(.bottom, -16)
+                Group {
+                    switch isTimerStopped {
+                    case true:
+                        takeButton
+                    case false:
+                        takeNowButton
+                    }
+                }
+                .padding(.bottom, -16)
             }
             .overlay {
                 VStack(spacing: 0) {
                     HStack(spacing: 1) {
-                        Text("\(dailyReward)")
+                        Text("\(reward)")
                             .font(.cherryBombOne(.regular, size: 15))
                             .foregroundStyle(.white)
                             .shadow(color: .fontShadow, radius: 4, x: 0, y: 4)
                         Image(.Menu.almazRounded)
                     }
-                    if let dateUntil = dateUntil {
+                    if !isTimerStopped {
                         Text(dateUntil, style: .timer)
                             .font(.cherryBombOne(.regular, size: 12))
                             .foregroundStyle(.white)
@@ -101,13 +140,11 @@ struct Menu: View {
         ZStack {
             VStack(alignment: .trailing) {
                 HStack {
-                    Group {
-                        infoButton
-                            .padding(.leading)
-                        Spacer()
-                        amountMoney
-                            .padding(.trailing)
-                    }
+                    infoButton
+                        .padding(.leading)
+                    Spacer()
+                    amountMoney
+                        .padding(.trailing)
                 }
                 timeBoard
                     .padding(.trailing)
@@ -116,9 +153,30 @@ struct Menu: View {
             .modifier(AlignmentPosition(.topLeading))
             barbie
         }.modifier(AppBackground(.Menu.background))
-            .onAppear {
-                dateUntil = defaultStorage.loadDate()
+            .onReceive(timer) { _ in
+                dailyRewardTimer()
+                dailyNowRewardTimer()
             }
+    }
+        
+    private func dailyRewardTimer() {
+        withAnimation {
+            if let dailyReward = defaultStorage.loadRewardModel(), dailyReward.dailyDate >= Date.now {
+                dateUntil = dailyReward.dailyDate
+            } else {
+                isDisabledReward = false
+            }
+        }
+    }
+    
+    private func dailyNowRewardTimer() {
+        withAnimation {
+            if let dailyNowReward = defaultStorage.loadRewardNowModel() {
+                isDisabledNowReward = dailyNowReward.nowReward
+            } else {
+                isDisabledNowReward = false
+            }
+        }
     }
     
     private var barbie: some View {
