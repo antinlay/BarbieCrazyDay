@@ -152,11 +152,55 @@ struct Menu: View {
             .padding(.top, -16)
             .modifier(AlignmentPosition(.topLeading))
             barbie
+            HStack(alignment: .bottom) {
+                Button {
+                    // quests view
+                } label: {
+                    Image(.Menu.questButton)
+                }
+                .padding(.bottom, -90)
+                Spacer()
+                VStack(alignment: .trailing, spacing: 0) {
+                    Button {
+                        // shop view
+                    } label: {
+                        Image(.Menu.shopButton)
+                    }
+                    .padding(.trailing, 10)
+                    Button {
+                        // games view
+                    } label: {
+                        Image(.Menu.gamesButton)
+                            .overlay(alignment: .bottom) {
+                                Image(.Menu.goButton)
+                                    .padding(.bottom, -16)
+                            }
+                    }
+                }
+            }
+            .padding(.horizontal, 24)
+            .padding(.bottom, -100)
+            levelBoard
         }.modifier(AppBackground(.Menu.background))
             .onReceive(timer) { _ in
                 dailyRewardTimer()
                 dailyNowRewardTimer()
             }
+    }
+    
+    private var levelBoard: some View {
+            Image(.Menu.board)
+            .overlay {
+                Button {
+                    
+                } label: {
+                    Image(.Menu.question)
+                }
+                .alignmentPosition(.topTrailing)
+                .offset(x: -6, y: -15)
+            }
+                .alignmentPosition(.bottomLeading)
+                .padding(.leading)
     }
         
     private func dailyRewardTimer() {
