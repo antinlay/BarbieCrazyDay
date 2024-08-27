@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct AlignmentPosition: ViewModifier {
+public struct AlignmentPosition: ViewModifier {
     let alignment: Alignment
     
-    init(_ alignment: Alignment) {
+    public init(_ alignment: Alignment) {
         self.alignment = alignment
     }
     
-    func body(content: Content) -> some View {
+    public func body(content: Content) -> some View {
         content
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: alignment)
     }

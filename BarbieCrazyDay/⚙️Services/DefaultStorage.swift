@@ -7,54 +7,52 @@
 
 import Foundation
 
-struct RewardModel: Codable {
-    var dailyDate: Date
-}
-
-struct RewardNowModel: Codable {
-    var nowReward: Bool
+extension DefaultStorage {
+    enum Key: String {
+        case welcome = "WelcomeShowed"
+        case wallet = "AmountCoins"
+        case reward = "DailyReward"
+        case nowReward = "NowReward"
+        case level = "CurrentLevel"
+        case available = "AvailableQuests"
+        case complete = "CompletedQuests"
+    }
 }
 
 class DefaultStorage {
     private let defaults = UserDefaults.standard
     
-    func getStructName<T>(_ instance: T) -> String {
-        let mirror = Mirror(reflecting: instance)
-        return String(describing: mirror.subjectType)
+    var isWelcomeShowed: Bool {
+        get { defaults.bool(forKey: Key.welcome.rawValue) }
+        set { defaults.set(newValue, forKey: Key.welcome.rawValue) }
     }
-
-    func saveRewardModel(_ rewardModel: RewardModel) {
-        let encoder = JSONEncoder()
-        if let encoded = try? encoder.encode(rewardModel) {
-            defaults.set(encoded, forKey: "RewardModel")
+    
+    var rewardDate: Date {
+        get { defaults.object(forKey: Key.reward.rawValue) as? Date ?? .now }
+        set {
+            defaults.set(newValue, forKey: Key.reward.rawValue)
+            defaults.set(false, forKey: Key.nowReward.rawValue)
         }
     }
     
-    func saveRewardNowModel(_ rewardNowModel: RewardNowModel) {
-        let encoder = JSONEncoder()
-        if let encoded = try? encoder.encode(rewardNowModel) {
-            defaults.set(encoded, forKey: "RewardNowModel")
-        }
-    }
-
-    func loadRewardModel() -> RewardModel? {
-        if let savedData = defaults.object(forKey: "RewardModel") as? Data {
-            let decoder = JSONDecoder()
-            if let loadedDateModel = try? decoder.decode(RewardModel.self, from: savedData) {
-                return loadedDateModel
-            }
-        }
-        return nil
+    var nowReward: Bool {
+        get { defaults.bool(forKey: Key.nowReward.rawValue) }
+        set { defaults.set(newValue, forKey: Key.nowReward.rawValue) }
     }
     
-    func loadRewardNowModel() -> RewardNowModel? {
-        if let savedData = defaults.object(forKey: "RewardNowModel") as? Data {
-            let decoder = JSONDecoder()
-            if let loadedDateModel = try? decoder.decode(RewardNowModel.self, from: savedData) {
-                return loadedDateModel
-            }
-        }
-        return nil
+    var level: Int {
+        get { defaults.object(forKey: Key.level.rawValue) as? Int ?? 1 }
+        set { defaults.set(newValue, forKey: Key.level.rawValue) }
+    }
+    
+    var availableQuests: [Int] {
+        get { defaults.object(forKey: Key.available.rawValue) as? [Int] ?? [1] }
+        set { defaults.set(newValue, forKey: Key.available.rawValue) }
+    }
+    
+    var completedQuests: [Int] {
+        get { defaults.object(forKey: Key.complete.rawValue) as? [Int] ?? [1] }
+        set { defaults.set(newValue, forKey: Key.complete.rawValue) }
     }
 
 }

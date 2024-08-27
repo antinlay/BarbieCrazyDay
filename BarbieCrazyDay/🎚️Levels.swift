@@ -121,27 +121,6 @@ struct LevelBoard: View {
 struct Levels: View {
     @State private var wallet: Int = 10000
     
-    private var amountMoney: some View {
-        Image(.Menu.amount)
-            .overlay {
-                HStack(spacing: 4) {
-                    Text("\(wallet)")
-                        .font(.cherryBombOne(.regular, size: 15))
-                        .foregroundStyle(.accent)
-                        .shadow(color: .fontShadow, radius: 4, x: 0, y: 4)
-                    Image(.Menu.almaz)
-                }
-            }
-    }
-    
-    private var homeButton: some View {
-        Button {
-            // navigate to home
-        } label: {
-            Image(.Quests.homeButton)
-        }
-    }
-    
     var body: some View {
         ZStack {
             ScrollView(showsIndicators: false) {
@@ -150,10 +129,12 @@ struct Levels: View {
                 }.padding(.top, 70)
             }
             HStack {
-                homeButton
+                HomeButon(action: {
+                    // navigate to home
+                })
                     .padding(.leading)
                 Spacer()
-                amountMoney
+                amountMoney(wallet)
                     .padding(.trailing)
             }.alignmentPosition(.top)
         }.modifier(AppBackground(.Shop.background))

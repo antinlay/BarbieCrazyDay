@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct AppBackground: ViewModifier {
+public struct AppBackground: ViewModifier {
     let imageResource: ImageResource
     
     init(_ imageResource: ImageResource) {
         self.imageResource = imageResource
     }
     
-    func body(content: Content) -> some View {
+    public func body(content: Content) -> some View {
         content
             .background { Image(imageResource).resizable().ignoresSafeArea() }
     }
