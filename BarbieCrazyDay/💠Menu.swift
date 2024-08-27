@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct Menu: View {
+    @State private var levelModel = Level.levelOne.value
     @State private var reward = 500
     @State private var nowReward = 300
     @State private var wallet: Int = 10000
@@ -84,7 +85,7 @@ struct Menu: View {
         .disabled(isDisabledNowReward)
         .opacity(isDisabledNowReward ? .zero : 1)
     }
-
+    
     private func getReward() {
         withAnimation {
             if let dateFuture = Calendar.current.date(byAdding: .hour, value: 12, to: .now) {
@@ -190,20 +191,11 @@ struct Menu: View {
     }
     
     private var levelBoard: some View {
-            Image(.Menu.board)
-            .overlay {
-                Button {
-                    
-                } label: {
-                    Image(.Menu.question)
-                }
-                .alignmentPosition(.topTrailing)
-                .offset(x: -6, y: -15)
-            }
-                .alignmentPosition(.bottomLeading)
-                .padding(.leading)
+        LevelBoard(levelModel: levelModel, isMenuMode: true)
+            .alignmentPosition(.bottomLeading)
+            .padding(.leading)
     }
-        
+    
     private func dailyRewardTimer() {
         withAnimation {
             if let dailyReward = defaultStorage.loadRewardModel(), dailyReward.dailyDate >= Date.now {
