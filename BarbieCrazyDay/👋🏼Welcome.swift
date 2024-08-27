@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct Welcome: View {
+    @EnvironmentObject private var defaultStorage: DefaultStorage
+    @EnvironmentObject private var router: Router
+    
     let step = """
                 Step into a world where each step leads you on an
                 epic journey filled with thrilling challenges,
@@ -48,7 +51,8 @@ struct Welcome: View {
     
     private var startButton: some View {
         Button {
-            // go to some view
+            defaultStorage.isWelcomeShowed = true
+            router.navigate(to: .menu)
         } label: {
             Image(.Welcome.start)
         }

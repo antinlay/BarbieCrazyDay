@@ -89,6 +89,7 @@ struct QuestContainer: View {
 }
 
 struct Quests: View {
+    @EnvironmentObject private var router: Router
     let giftArray = Array(Gift.allCases.enumerated())
     
     @State private var wallet: Int = 10000
@@ -99,7 +100,7 @@ struct Quests: View {
                 VStack {
                     HStack {
                         HomeButon(action: {
-                            // navigate to home view
+                            router.navigate(to: .menu)
                         })
                             .padding(.leading)
                         Spacer()

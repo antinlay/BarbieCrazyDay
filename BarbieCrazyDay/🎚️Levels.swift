@@ -44,6 +44,7 @@ enum Level: CaseIterable {
 }
 
 struct LevelBoard: View {
+    @EnvironmentObject private var router: Router
     var levelModel: LevelModel
     var isMenuMode: Bool? = false
     
@@ -83,7 +84,7 @@ struct LevelBoard: View {
     
     private var questionButton: some View {
         Button {
-            // to Levels
+            router.navigate(to: .levels)
         } label: {
             Image(.Menu.question)
                 .offset(x: -6, y: -15)

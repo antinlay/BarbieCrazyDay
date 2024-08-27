@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct Info: View {
+    @EnvironmentObject private var router: Router
     @State private var wallet: Int = 10000
 
     var body: some View {
@@ -15,7 +16,7 @@ struct Info: View {
             VStack {
                 HStack {
                     HomeButon(action: {
-                        // navigate to home
+                        router.navigate(to: .menu)
                     })
                         .padding(.leading)
                     Spacer()

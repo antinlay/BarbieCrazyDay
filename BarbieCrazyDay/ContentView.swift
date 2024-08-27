@@ -8,11 +8,23 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject private var router: Router
+    @EnvironmentObject private var defaultStorage: DefaultStorage
+    
     var body: some View {
-        Menu()
+        Group {
+            switch defaultStorage.isWelcomeShowed {
+            case false:
+                Welcome()
+            case true:
+                router.current.view
+            }
+        }
+        .animation(.default, value: router.current)
     }
 }
 
 #Preview {
     ContentView()
+        .environmentObject(Router())
 }

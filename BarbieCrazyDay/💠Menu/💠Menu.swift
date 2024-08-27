@@ -1,5 +1,5 @@
 //
-//  💠Menu.swift
+//  💠GameMenu.swift
 //  BarbieCrazyDay
 //
 //  Created by Janiece Eleonour on 24.08.2024.
@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-struct Menu: View {
+struct GameMenu: View {
+    @EnvironmentObject private var router: Router
     @State private var wallet: Int = 10000
     @State private var levelModel = Level.levelOne.value
                 
@@ -15,9 +16,7 @@ struct Menu: View {
         ZStack {
             VStack(alignment: .trailing) {
                 HStack {
-                    InfoButton(action: {
-                        // navigate to Info
-                    })
+                    InfoButton(action: { router.navigate(to: .info) })
                         .padding(.leading)
                     Spacer()
                     amountMoney(wallet)
@@ -31,7 +30,7 @@ struct Menu: View {
             barbie
             HStack(alignment: .bottom) {
                 Button {
-                    // quests view
+                    router.navigate(to: .quests)
                 } label: {
                     Image(.Menu.questButton)
                 }
@@ -39,13 +38,13 @@ struct Menu: View {
                 Spacer()
                 VStack(alignment: .trailing, spacing: 0) {
                     Button {
-                        // shop view
+                        router.navigate(to: .shop)
                     } label: {
                         Image(.Menu.shopButton)
                     }
                     .padding(.trailing, 10)
                     Button {
-                        // games view
+                        router.navigate(to: .shop)
                     } label: {
                         Image(.Menu.gamesButton)
                             .overlay(alignment: .bottom) {
@@ -75,5 +74,6 @@ struct Menu: View {
 }
 
 #Preview {
-    Menu()
+    GameMenu()
+        .environmentObject(Router())
 }

@@ -19,7 +19,7 @@ extension DefaultStorage {
     }
 }
 
-class DefaultStorage {
+final class DefaultStorage: ObservableObject {
     private let defaults = UserDefaults.standard
     
     var isWelcomeShowed: Bool {
