@@ -19,8 +19,25 @@ enum CherryBombOne: String {
 //    case black = "Black"
 }
 
+enum Dynamo: String {
+//    case thin = "Thin"
+//    case extraLight = "ExtraLight"
+//    case light = "Light"
+    case regular = "regular"
+//    case medium = "Medium"
+//    case semibold = "SemiBold"
+//    case bold = "Bold"
+//    case extraBold = "ExtraBold"
+//    case black = "Black"
+}
+
+
 extension Font {
     static func cherryBombOne(_ weight: CherryBombOne, size: CGFloat, isItalic: Bool = false) -> Font {
         Font.custom("CherryBombOne-\(weight.rawValue)" + (isItalic ? "Italic" : "") , size: size)
+    }
+    
+    static func dynamo(_ weight: Dynamo, size: CGFloat, isItalic: Bool = false) -> Font {
+        Font.custom("dynamo-\(weight.rawValue)" + (isItalic ? "Italic" : "") , size: size)
     }
 }

@@ -12,7 +12,10 @@
 		5C0780E72C790782002C7F54 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0780E62C790782002C7F54 /* Color.swift */; };
 		5C0780E92C7A55BE002C7F54 /* 💠Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0780E82C7A55BE002C7F54 /* 💠Menu.swift */; };
 		5C0780EC2C7B15F3002C7F54 /* DefaultStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0780EB2C7B15F3002C7F54 /* DefaultStorage.swift */; };
-		5C0780F02C7D0E1A002C7F54 /* ℹ️Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0780EF2C7D0E1A002C7F54 /* ℹ️Info.swift */; };
+		5C0780F02C7D0E1A002C7F54 /* 🍩Quests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0780EF2C7D0E1A002C7F54 /* 🍩Quests.swift */; };
+		5C0780F22C7DB977002C7F54 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0780F12C7DB977002C7F54 /* Router.swift */; };
+		5C0780F42C7DBE6F002C7F54 /* ℹ️Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0780F32C7DBE6F002C7F54 /* ℹ️Info.swift */; };
+		5C0780FB2C7DC6F7002C7F54 /* dynamo-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C0780FA2C7DC6F7002C7F54 /* dynamo-regular.ttf */; };
 		5C45B1CB2C78C75C00628C16 /* BarbieCrazyDayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C45B1CA2C78C75C00628C16 /* BarbieCrazyDayApp.swift */; };
 		5C45B1CD2C78C75C00628C16 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C45B1CC2C78C75C00628C16 /* ContentView.swift */; };
 		5C45B1CF2C78C75D00628C16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C45B1CE2C78C75D00628C16 /* Assets.xcassets */; };
@@ -28,7 +31,10 @@
 		5C0780E62C790782002C7F54 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		5C0780E82C7A55BE002C7F54 /* 💠Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "💠Menu.swift"; sourceTree = "<group>"; };
 		5C0780EB2C7B15F3002C7F54 /* DefaultStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStorage.swift; sourceTree = "<group>"; };
-		5C0780EF2C7D0E1A002C7F54 /* ℹ️Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ℹ️Info.swift"; sourceTree = "<group>"; };
+		5C0780EF2C7D0E1A002C7F54 /* 🍩Quests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "🍩Quests.swift"; sourceTree = "<group>"; };
+		5C0780F12C7DB977002C7F54 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		5C0780F32C7DBE6F002C7F54 /* ℹ️Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ℹ️Info.swift"; sourceTree = "<group>"; };
+		5C0780FA2C7DC6F7002C7F54 /* dynamo-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "dynamo-regular.ttf"; sourceTree = "<group>"; };
 		5C45B1C72C78C75C00628C16 /* BarbieCrazyDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BarbieCrazyDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C45B1CA2C78C75C00628C16 /* BarbieCrazyDayApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarbieCrazyDayApp.swift; sourceTree = "<group>"; };
 		5C45B1CC2C78C75C00628C16 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -54,6 +60,7 @@
 		5C0780DD2C790024002C7F54 /* 🧩Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				5C0780F72C7DC4F6002C7F54 /* Dynamo */,
 				5C0780E02C79011D002C7F54 /* CherryBombOne */,
 				5C0780DE2C7900B4002C7F54 /* Custom.swift */,
 			);
@@ -80,8 +87,17 @@
 			isa = PBXGroup;
 			children = (
 				5C0780EB2C7B15F3002C7F54 /* DefaultStorage.swift */,
+				5C0780F12C7DB977002C7F54 /* Router.swift */,
 			);
 			path = "⚙️Services";
+			sourceTree = "<group>";
+		};
+		5C0780F72C7DC4F6002C7F54 /* Dynamo */ = {
+			isa = PBXGroup;
+			children = (
+				5C0780FA2C7DC6F7002C7F54 /* dynamo-regular.ttf */,
+			);
+			path = Dynamo;
 			sourceTree = "<group>";
 		};
 		5C45B1BE2C78C75C00628C16 = {
@@ -106,7 +122,8 @@
 				5C842E7E2C78D2C300103584 /* Info.plist */,
 				5C842E792C78CDB300103584 /* 👋🏼Welcome.swift */,
 				5C0780E82C7A55BE002C7F54 /* 💠Menu.swift */,
-				5C0780EF2C7D0E1A002C7F54 /* ℹ️Info.swift */,
+				5C0780EF2C7D0E1A002C7F54 /* 🍩Quests.swift */,
+				5C0780F32C7DBE6F002C7F54 /* ℹ️Info.swift */,
 				5C45B1CA2C78C75C00628C16 /* BarbieCrazyDayApp.swift */,
 				5C45B1CC2C78C75C00628C16 /* ContentView.swift */,
 				5C0780EA2C7B15D0002C7F54 /* ⚙️Services */,
@@ -195,6 +212,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C0780E42C790318002C7F54 /* CherryBombOne-Regular.ttf in Resources */,
+				5C0780FB2C7DC6F7002C7F54 /* dynamo-regular.ttf in Resources */,
 				5C45B1D22C78C75D00628C16 /* Preview Assets.xcassets in Resources */,
 				5C45B1CF2C78C75D00628C16 /* Assets.xcassets in Resources */,
 			);
@@ -207,12 +225,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C0780F22C7DB977002C7F54 /* Router.swift in Sources */,
 				5C45B1CD2C78C75C00628C16 /* ContentView.swift in Sources */,
 				5C0780E92C7A55BE002C7F54 /* 💠Menu.swift in Sources */,
 				5C45B1CB2C78C75C00628C16 /* BarbieCrazyDayApp.swift in Sources */,
-				5C0780F02C7D0E1A002C7F54 /* ℹ️Info.swift in Sources */,
+				5C0780F02C7D0E1A002C7F54 /* 🍩Quests.swift in Sources */,
 				5C0780E72C790782002C7F54 /* Color.swift in Sources */,
 				5C0780EC2C7B15F3002C7F54 /* DefaultStorage.swift in Sources */,
+				5C0780F42C7DBE6F002C7F54 /* ℹ️Info.swift in Sources */,
 				5C0780DF2C7900B4002C7F54 /* Custom.swift in Sources */,
 				5C842E7A2C78CDB300103584 /* 👋🏼Welcome.swift in Sources */,
 				5C842E802C78DFDD00103584 /* Position.swift in Sources */,

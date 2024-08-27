@@ -5,6 +5,7 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>CherryBombOne-Regular.ttf</string>
+		<string>dynamo-regular.ttf</string>
 	</array>
 	<key>UILaunchScreen</key>
 	<dict>
