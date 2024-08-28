@@ -7,15 +7,17 @@
 
 import SwiftUI
 
-public func amountMoney(_ wallet: Int) -> some View {
-    Image(.Menu.amount)
-        .overlay {
-            HStack(spacing: 4) {
-                Text("\(wallet)")
-                    .font(.cherryBombOne(.regular, size: 15))
-                    .foregroundStyle(.accent)
-                    .shadow(color: .fontShadow, radius: 4, x: 0, y: 4)
-                Image(.Menu.almaz)
-            }
-        }
+public struct TextOnBoardStyle: ViewModifier {
+    public func body(content: Content) -> some View {
+        content
+            .font(.cherryBombOne(.regular, size: 15))
+            .foregroundColor(.white)
+            .shadow(color: .fontShadow, radius: 4, x: 0, y: 4)
+    }
+}
+
+extension View {
+    public var textOnBoardStyle: some View {
+        modifier(TextOnBoardStyle())
+    }
 }

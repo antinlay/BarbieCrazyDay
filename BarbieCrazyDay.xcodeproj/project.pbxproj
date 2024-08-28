@@ -22,6 +22,9 @@
 		5C0781032C7E2C35002C7F54 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0781022C7E2C35002C7F54 /* Component.swift */; };
 		5C0781062C7E2F95002C7F54 /* 🕰️TimeBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0781052C7E2F95002C7F54 /* 🕰️TimeBoard.swift */; };
 		5C07810B2C7E5B16002C7F54 /* 🎲ChestGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C07810A2C7E5B16002C7F54 /* 🎲ChestGame.swift */; };
+		5C07810D2C7F2D5E002C7F54 /* 🪙Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C07810C2C7F2D5E002C7F54 /* 🪙Wallet.swift */; };
+		5C0781102C7F2F8F002C7F54 /* Story.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C07810F2C7F2F8F002C7F54 /* Story.swift */; };
+		5C0781122C7F4E56002C7F54 /* StoryResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0781112C7F4E56002C7F54 /* StoryResult.swift */; };
 		5C45B1CB2C78C75C00628C16 /* BarbieCrazyDayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C45B1CA2C78C75C00628C16 /* BarbieCrazyDayApp.swift */; };
 		5C45B1CD2C78C75C00628C16 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C45B1CC2C78C75C00628C16 /* ContentView.swift */; };
 		5C45B1CF2C78C75D00628C16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C45B1CE2C78C75D00628C16 /* Assets.xcassets */; };
@@ -29,6 +32,8 @@
 		5C842E7A2C78CDB300103584 /* 👋🏼Welcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C842E792C78CDB300103584 /* 👋🏼Welcome.swift */; };
 		5C842E7D2C78D0FD00103584 /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C842E7C2C78D0FD00103584 /* Background.swift */; };
 		5C842E802C78DFDD00103584 /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C842E7F2C78DFDD00103584 /* Position.swift */; };
+		5C9E1A6D2C7FA3CD0090B49A /* QuestCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9E1A6C2C7FA3CD0090B49A /* QuestCases.swift */; };
+		5C9E1A6F2C7FA4010090B49A /* QuestContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9E1A6E2C7FA4010090B49A /* QuestContainer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +52,9 @@
 		5C0781022C7E2C35002C7F54 /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		5C0781052C7E2F95002C7F54 /* 🕰️TimeBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "🕰️TimeBoard.swift"; sourceTree = "<group>"; };
 		5C07810A2C7E5B16002C7F54 /* 🎲ChestGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "🎲ChestGame.swift"; sourceTree = "<group>"; };
+		5C07810C2C7F2D5E002C7F54 /* 🪙Wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "🪙Wallet.swift"; sourceTree = "<group>"; };
+		5C07810F2C7F2F8F002C7F54 /* Story.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Story.swift; sourceTree = "<group>"; };
+		5C0781112C7F4E56002C7F54 /* StoryResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryResult.swift; sourceTree = "<group>"; };
 		5C45B1C72C78C75C00628C16 /* BarbieCrazyDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BarbieCrazyDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C45B1CA2C78C75C00628C16 /* BarbieCrazyDayApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarbieCrazyDayApp.swift; sourceTree = "<group>"; };
 		5C45B1CC2C78C75C00628C16 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -56,6 +64,8 @@
 		5C842E7C2C78D0FD00103584 /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 		5C842E7E2C78D2C300103584 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C842E7F2C78DFDD00103584 /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
+		5C9E1A6C2C7FA3CD0090B49A /* QuestCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestCases.swift; sourceTree = "<group>"; };
+		5C9E1A6E2C7FA4010090B49A /* QuestContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestContainer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +127,7 @@
 			children = (
 				5C0780E82C7A55BE002C7F54 /* 💠Menu.swift */,
 				5C0781052C7E2F95002C7F54 /* 🕰️TimeBoard.swift */,
+				5C07810C2C7F2D5E002C7F54 /* 🪙Wallet.swift */,
 			);
 			path = "💠Menu";
 			sourceTree = "<group>";
@@ -128,6 +139,15 @@
 				5C07810A2C7E5B16002C7F54 /* 🎲ChestGame.swift */,
 			);
 			path = "🛍️Shop";
+			sourceTree = "<group>";
+		};
+		5C07810E2C7F2F3C002C7F54 /* 🍒Srories */ = {
+			isa = PBXGroup;
+			children = (
+				5C07810F2C7F2F8F002C7F54 /* Story.swift */,
+				5C0781112C7F4E56002C7F54 /* StoryResult.swift */,
+			);
+			path = "🍒Srories";
 			sourceTree = "<group>";
 		};
 		5C45B1BE2C78C75C00628C16 = {
@@ -152,11 +172,12 @@
 				5C842E7E2C78D2C300103584 /* Info.plist */,
 				5C842E792C78CDB300103584 /* 👋🏼Welcome.swift */,
 				5C0781042C7E2F67002C7F54 /* 💠Menu */,
-				5C0780EF2C7D0E1A002C7F54 /* 🍩Quests.swift */,
+				5C9E1A6B2C7FA3A80090B49A /* 🍩Quests */,
 				5C0780F32C7DBE6F002C7F54 /* ℹ️Info.swift */,
 				5C0780FC2C7DF0A2002C7F54 /* 🎚️Levels.swift */,
 				5C0781092C7E5AD4002C7F54 /* 🛍️Shop */,
 				5C45B1CA2C78C75C00628C16 /* BarbieCrazyDayApp.swift */,
+				5C07810E2C7F2F3C002C7F54 /* 🍒Srories */,
 				5C45B1CC2C78C75C00628C16 /* ContentView.swift */,
 				5C0780EA2C7B15D0002C7F54 /* ⚙️Services */,
 				5C0780DD2C790024002C7F54 /* 🧩Fonts */,
@@ -185,6 +206,16 @@
 				5C0781022C7E2C35002C7F54 /* Component.swift */,
 			);
 			path = "🧩Extensions";
+			sourceTree = "<group>";
+		};
+		5C9E1A6B2C7FA3A80090B49A /* 🍩Quests */ = {
+			isa = PBXGroup;
+			children = (
+				5C0780EF2C7D0E1A002C7F54 /* 🍩Quests.swift */,
+				5C9E1A6E2C7FA4010090B49A /* QuestContainer.swift */,
+				5C9E1A6C2C7FA3CD0090B49A /* QuestCases.swift */,
+			);
+			path = "🍩Quests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,20 +294,25 @@
 				5C45B1CD2C78C75C00628C16 /* ContentView.swift in Sources */,
 				5C0780E92C7A55BE002C7F54 /* 💠Menu.swift in Sources */,
 				5C07810B2C7E5B16002C7F54 /* 🎲ChestGame.swift in Sources */,
+				5C0781122C7F4E56002C7F54 /* StoryResult.swift in Sources */,
 				5C0780FF2C7E0D51002C7F54 /* 🛍️Shop.swift in Sources */,
 				5C45B1CB2C78C75C00628C16 /* BarbieCrazyDayApp.swift in Sources */,
 				5C0780F02C7D0E1A002C7F54 /* 🍩Quests.swift in Sources */,
 				5C0780FD2C7DF0A2002C7F54 /* 🎚️Levels.swift in Sources */,
 				5C0781062C7E2F95002C7F54 /* 🕰️TimeBoard.swift in Sources */,
+				5C9E1A6D2C7FA3CD0090B49A /* QuestCases.swift in Sources */,
 				5C0780E72C790782002C7F54 /* Color.swift in Sources */,
 				5C0780EC2C7B15F3002C7F54 /* DefaultStorage.swift in Sources */,
 				5C0780F42C7DBE6F002C7F54 /* ℹ️Info.swift in Sources */,
+				5C9E1A6F2C7FA4010090B49A /* QuestContainer.swift in Sources */,
 				5C0781012C7E2926002C7F54 /* Button.swift in Sources */,
+				5C0781102C7F2F8F002C7F54 /* Story.swift in Sources */,
 				5C0780DF2C7900B4002C7F54 /* Custom.swift in Sources */,
 				5C842E7A2C78CDB300103584 /* 👋🏼Welcome.swift in Sources */,
 				5C0781032C7E2C35002C7F54 /* Component.swift in Sources */,
 				5C842E802C78DFDD00103584 /* Position.swift in Sources */,
 				5C842E7D2C78D0FD00103584 /* Background.swift in Sources */,
+				5C07810D2C7F2D5E002C7F54 /* 🪙Wallet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -418,7 +454,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -452,7 +488,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

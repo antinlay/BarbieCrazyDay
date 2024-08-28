@@ -45,14 +45,15 @@ struct Welcome: View {
                 .shadow(color: .black, radius: 4, x: 0, y: 4)
             }
             .modifier(AlignmentPosition(.topTrailing))
-            .padding(.top, 165)
+            .padding(.top, 100)
             .padding(.trailing, 20)
     }
     
     private var startButton: some View {
         Button {
             defaultStorage.isWelcomeShowed = true
-            router.navigate(to: .menu)
+            defaultStorage.level = 1
+            router.navigate(to: GameViews.menu)
         } label: {
             Image(.Welcome.start)
         }
@@ -61,40 +62,40 @@ struct Welcome: View {
     var body: some View {
         ZStack {
             Image(.Welcome.barbie)
-                .modifier(AlignmentPosition(.bottomLeading))
+                .modifier(AlignmentPosition(.bottomLeading)).ignoresSafeArea()
             cloudHi
-            VStack {
+            VStack(spacing: 20) {
                 stepDescription
                 rememberDescription
                 startButton
             }.modifier(AlignmentPosition(.bottom))
-                .padding(.bottom, 44)
+                .padding(.bottom, 24)
         }.modifier(AppBackground(.Welcome.background))
     }
     
     private var stepDescription: some View {
-        Image(.Welcome.step)
-            .overlay {
-                Text(step)
-                    .font(.cherryBombOne(.regular, size: 13))
-                    .foregroundStyle(.white)
-                    .multilineTextAlignment(.center)
-                    .shadow(color: .black, radius: 4, x: 0, y: 4)
-            }
+        Text(step)
+            .font(.cherryBombOne(.regular, size: 13))
+            .foregroundStyle(.white)
+            .multilineTextAlignment(.center)
+            .shadow(color: .black, radius: 4, x: 0, y: 4)
+            .boardBackground
+            .padding(.horizontal, 24)
     }
     
     private var rememberDescription: some View {
-        Image(.Welcome.remember)
-            .overlay {
-                Text(remember)
-                    .font(.cherryBombOne(.regular, size: 13))
-                    .foregroundStyle(.white)
-                    .multilineTextAlignment(.center)
-                    .shadow(color: .black, radius: 4, x: 0, y: 4)
-            }
+        Text(remember)
+            .font(.cherryBombOne(.regular, size: 13))
+            .foregroundStyle(.white)
+            .multilineTextAlignment(.center)
+            .shadow(color: .black, radius: 4, x: 0, y: 4)
+            .boardBackground
+            .padding(.horizontal, 24)
     }
 }
 
 #Preview {
     Welcome()
+        .environmentObject(Router())
+        .environmentObject(DefaultStorage())
 }

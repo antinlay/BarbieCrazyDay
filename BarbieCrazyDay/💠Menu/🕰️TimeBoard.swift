@@ -8,20 +8,19 @@
 import SwiftUI
 
 struct TimeBoard: View {
-    @State private var reward = 500
-    @State private var nowReward = 300
-    @State private var wallet: Int = 10000
     @State private var dateUntil: Date = .now
     @State private var isDisabledNowReward: Bool = true
     @State private var isDisabledReward: Bool = true
+    private var reward = 500
+    private var nowReward = 300
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     private var defaultStorage = DefaultStorage()
-
+    
     
     private var isTimerStopped: Bool { dateUntil < Date.now }
-        
+    
     private var takeButton: some View {
         Button {
             getReward()
@@ -63,8 +62,8 @@ struct TimeBoard: View {
         .disabled(isDisabledNowReward)
         .opacity(isDisabledNowReward ? .zero : 1)
     }
-
-
+    
+    
     private var timeBoard: some View {
         Image(.Menu.timeBoard)
             .overlay(alignment: .bottom) {
@@ -97,7 +96,7 @@ struct TimeBoard: View {
                 .padding(.bottom, 8)
             }
     }
-
+    
     var body: some View {
         timeBoard
             .onReceive(timer) { _ in
@@ -107,22 +106,18 @@ struct TimeBoard: View {
     }
     
     private func getReward() {
-        withAnimation {
-            if let dateFuture = Calendar.current.date(byAdding: .hour, value: 12, to: .now) {
-                defaultStorage.rewardDate = dateFuture
-                dateUntil = dateFuture
-                wallet += reward
-                isDisabledReward = true
-            }
+        if let dateFuture = Calendar.current.date(byAdding: .hour, value: 12, to: .now) {
+            defaultStorage.rewardDate = dateFuture
+            dateUntil = dateFuture
+            defaultStorage.wallet += reward
+            isDisabledReward = true
         }
     }
     
     private func getRewardNow() {
-        withAnimation {
-            defaultStorage.nowReward = true
-            wallet += nowReward
-            isDisabledNowReward = true
-        }
+        defaultStorage.nowReward = true
+        defaultStorage.wallet += nowReward
+        isDisabledNowReward = true
     }
     
     private func dailyRewardTimer() {
@@ -140,8 +135,8 @@ struct TimeBoard: View {
             isDisabledNowReward = defaultStorage.nowReward
         }
     }
-
-
+    
+    
 }
 
 #Preview {

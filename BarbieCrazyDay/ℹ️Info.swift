@@ -9,22 +9,21 @@ import SwiftUI
 
 struct Info: View {
     @EnvironmentObject private var router: Router
-    @State private var wallet: Int = 10000
 
     var body: some View {
         ZStack {
             VStack {
                 HStack {
                     HomeButon(action: {
-                        router.navigate(to: .menu)
+                        router.navigate(to: GameViews.menu)
                     })
                         .padding(.leading)
                     Spacer()
-                    amountMoney(wallet)
+                    Wallet()
                         .padding(.trailing)
                 }
-                Image(.Info.textBoard)
-                    .overlay {
+//                Image(.Info.textBoard)
+//                    .overlay {
                         ScrollView(showsIndicators: false) {
                             VStack {
                                 Text("\nAbout the App")
@@ -34,9 +33,10 @@ struct Info: View {
                             }
                             .foregroundStyle(.white)
                         }
+                        .boardBackground
                         .padding(.vertical, 6)
                         .padding(.horizontal, 24)
-                    }
+//                    }
                     .alignmentPosition(.bottom)
                     .padding(.bottom)
             }
@@ -143,4 +143,6 @@ struct Info: View {
 
 #Preview {
     Info()
+        .environmentObject(Router())
+        .environmentObject(DefaultStorage())
 }

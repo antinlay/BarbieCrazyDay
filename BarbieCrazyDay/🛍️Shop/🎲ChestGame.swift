@@ -8,21 +8,17 @@
 import SwiftUI
 
 struct ChestGame: View {
-    @State var start: Bool
-    @State private var wallet = 10_000
-    @State var isRewardShowing = false
+    @EnvironmentObject private var defaultStorage: DefaultStorage
+    @Binding var start: Bool
+    @State private var isRewardShowing = false
     private var chests: Set<ImageResource> = [.Shop.chest1, .Shop.chest2, .Shop.chest3, .Shop.chest4, .Shop.chest5, .Shop.chest6]
-    
-    init(start: Bool) {
-        self.start = start
-    }
     
     @ViewBuilder private func rewardButton(_ chest: ImageResource) -> some View {
         let random = Int.random(in: 100...5000)
         
         Button {
             withAnimation {
-                wallet += random
+                defaultStorage.wallet += random
                 isRewardShowing = true
                 start = false
             }
@@ -41,6 +37,10 @@ struct ChestGame: View {
         }
     }
     
+    init(start: Binding<Bool>) {
+        self._start = start
+    }
+    
     var body: some View {
         LazyHStack {
             ForEach(Array(chests.enumerated()).prefix(3), id: \.offset) { index, chest in
@@ -53,5 +53,6 @@ struct ChestGame: View {
 }
 
 #Preview {
-    ChestGame(start: true)
+    ChestGame(start: .constant(true))
+        .environmentObject(DefaultStorage())
 }

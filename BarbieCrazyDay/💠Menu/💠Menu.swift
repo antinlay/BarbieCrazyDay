@@ -9,28 +9,27 @@ import SwiftUI
 
 struct GameMenu: View {
     @EnvironmentObject private var router: Router
-    @State private var wallet: Int = 10000
-    @State private var levelModel = Level.levelOne.value
+    @EnvironmentObject private var defaultStorage: DefaultStorage
                 
     var body: some View {
         ZStack {
+            barbie
+            levelBoard
             VStack(alignment: .trailing) {
                 HStack {
-                    InfoButton(action: { router.navigate(to: .info) })
+                    InfoButton(action: { router.navigate(to: GameViews.info) })
                         .padding(.leading)
                     Spacer()
-                    amountMoney(wallet)
+                    Wallet()
                         .padding(.trailing)
                 }
                 TimeBoard()
                     .padding(.trailing)
             }
-            .padding(.top, -16)
             .modifier(AlignmentPosition(.topLeading))
-            barbie
             HStack(alignment: .bottom) {
                 Button {
-                    router.navigate(to: .quests)
+                    router.navigate(to: GameViews.quests)
                 } label: {
                     Image(.Menu.questButton)
                 }
@@ -38,13 +37,13 @@ struct GameMenu: View {
                 Spacer()
                 VStack(alignment: .trailing, spacing: 0) {
                     Button {
-                        router.navigate(to: .shop)
+                        router.navigate(to: GameViews.shop)
                     } label: {
                         Image(.Menu.shopButton)
                     }
                     .padding(.trailing, 10)
                     Button {
-                        router.navigate(to: .shop)
+                        router.navigate(to: GameViews.shop)
                     } label: {
                         Image(.Menu.gamesButton)
                             .overlay(alignment: .bottom) {
@@ -56,12 +55,11 @@ struct GameMenu: View {
             }
             .padding(.horizontal, 24)
             .padding(.bottom, -100)
-            levelBoard
         }.modifier(AppBackground(.Menu.background))
     }
     
     private var levelBoard: some View {
-        LevelBoard(levelModel: levelModel, isMenuMode: true)
+        LevelBoard(level: defaultStorage.level, isMenuMode: true)
             .alignmentPosition(.bottomLeading)
             .padding(.leading)
     }
@@ -76,4 +74,5 @@ struct GameMenu: View {
 #Preview {
     GameMenu()
         .environmentObject(Router())
+        .environmentObject(DefaultStorage())
 }

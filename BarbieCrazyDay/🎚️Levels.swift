@@ -7,68 +7,34 @@
 
 import SwiftUI
 
-struct LevelModel: Hashable {
-    var level: Int
-    var rich: Double
-    var reward: Int
-    var confirmed: Bool = false
-}
-
-enum Level: CaseIterable {
-    case levelOne, levelTwo, levelThree, levelFour, levelFive, levelSix, levelSeven, levelEight, levelNine, levelTen
-    
-    var value: LevelModel {
-        switch self {
-        case .levelOne:
-            LevelModel(level: 1, rich: 1.5, reward: 1000, confirmed: true)
-        case .levelTwo:
-            LevelModel(level: 2, rich: 3.5, reward: 2000)
-        case .levelThree:
-            LevelModel(level: 3, rich: 5, reward: 3000)
-        case .levelFour:
-            LevelModel(level: 4, rich: 6.5, reward: 4000)
-        case .levelFive:
-            LevelModel(level: 5, rich: 8, reward: 5000)
-        case .levelSix:
-            LevelModel(level: 6, rich: 9.5, reward: 6000)
-        case .levelSeven:
-            LevelModel(level: 7, rich: 11, reward: 7000)
-        case .levelEight:
-            LevelModel(level: 8, rich: 12.5, reward: 8000)
-        case .levelNine:
-            LevelModel(level: 9, rich: 14, reward: 9000)
-        case .levelTen:
-            LevelModel(level: 10, rich: 15.5, reward: 10000)
-        }
-    }
-}
-
 struct LevelBoard: View {
+    @State var level: Int
+    @State private var confirmed: Bool = false
     @EnvironmentObject private var router: Router
-    var levelModel: LevelModel
+    @EnvironmentObject private var defaultStorage: DefaultStorage
     var isMenuMode: Bool? = false
     
     @ViewBuilder private func textRichText(first: String, last: String) -> some View {
-        let confirmedImage: ImageResource = levelModel.confirmed ? .Levels.on : .Levels.off
+        let confirmedImage: ImageResource = confirmed ? .Levels.on : .Levels.off
         
         HStack {
             Image(confirmedImage)
             Text(first) +
-            Text(levelModel.rich, format: .number) +
+            Text(Double(level) * 1.5, format: .number) +
             Text(last)
         }.font(.cherryBombOne(.regular, size: 12))
 
     }
     
     @ViewBuilder private var plusBoard: some View {
-        let confirmedImage: ImageResource = levelModel.confirmed ? .Levels.done : .Levels.next
+        let confirmedImage: ImageResource = confirmed ? .Levels.done : .Levels.next
         
         Image(.Levels.plusBoard)
             .offset(y: -5)
             .overlay(alignment: .topTrailing) {
                 HStack(spacing: 4) {
                     Text("+") +
-                    Text(levelModel.reward, format: .number)
+                    Text(level * 1000, format: .number)
                     Image(.Levels.almaz)
                 }
                     .font(.cherryBombOne(.regular, size: 15))
@@ -84,7 +50,7 @@ struct LevelBoard: View {
     
     private var questionButton: some View {
         Button {
-            router.navigate(to: .levels)
+            router.navigate(to: GameViews.levels)
         } label: {
             Image(.Menu.question)
                 .offset(x: -6, y: -15)
@@ -95,7 +61,7 @@ struct LevelBoard: View {
         Image(.Levels.levelBoard)
             .overlay(alignment: .topLeading) {
                 VStack(spacing: 0) {
-                    Text("YOUR LEVEL: \(levelModel.level)")
+                    Text("YOUR LEVEL: \(level)")
                         .font(.cherryBombOne(.regular, size: 20))
                         .padding(.top)
                         .padding(.leading, 46)
@@ -116,26 +82,30 @@ struct LevelBoard: View {
                     plusBoard
                 }
             }
+            .onAppear {
+                confirmed = defaultStorage.level >= level
+            }
     }
 }
 
 struct Levels: View {
-    @State private var wallet: Int = 10000
+    @EnvironmentObject private var router: Router
+    @EnvironmentObject private var defaultStorage: DefaultStorage
     
     var body: some View {
         ZStack {
             ScrollView(showsIndicators: false) {
-                ForEach(Level.allCases, id: \.value) { level in
-                    LevelBoard(levelModel: level.value)
+                ForEach(1...10, id: \.self) { level in
+                    LevelBoard(level: level)
                 }.padding(.top, 70)
             }
             HStack {
                 HomeButon(action: {
-                    // navigate to home
+                    router.navigate(to: GameViews.menu)
                 })
                     .padding(.leading)
                 Spacer()
-                amountMoney(wallet)
+                Wallet()
                     .padding(.trailing)
             }.alignmentPosition(.top)
         }.modifier(AppBackground(.Shop.background))
@@ -144,4 +114,6 @@ struct Levels: View {
 
 #Preview {
     Levels()
+        .environmentObject(DefaultStorage())
+        .environmentObject(Router())
 }

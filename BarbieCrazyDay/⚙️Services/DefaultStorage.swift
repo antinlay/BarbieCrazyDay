@@ -22,6 +22,11 @@ extension DefaultStorage {
 final class DefaultStorage: ObservableObject {
     private let defaults = UserDefaults.standard
     
+    var wallet: Int {
+        get { defaults.integer(forKey: Key.wallet.rawValue) }
+        set { defaults.set(newValue, forKey: Key.wallet.rawValue)}
+    }
+    
     var isWelcomeShowed: Bool {
         get { defaults.bool(forKey: Key.welcome.rawValue) }
         set { defaults.set(newValue, forKey: Key.welcome.rawValue) }
@@ -45,13 +50,8 @@ final class DefaultStorage: ObservableObject {
         set { defaults.set(newValue, forKey: Key.level.rawValue) }
     }
     
-    var availableQuests: [Int] {
-        get { defaults.object(forKey: Key.available.rawValue) as? [Int] ?? [1] }
-        set { defaults.set(newValue, forKey: Key.available.rawValue) }
-    }
-    
-    var completedQuests: [Int] {
-        get { defaults.object(forKey: Key.complete.rawValue) as? [Int] ?? [1] }
+    var completedQuests: Int {
+        get { defaults.integer(forKey: Key.complete.rawValue) }
         set { defaults.set(newValue, forKey: Key.complete.rawValue) }
     }
 

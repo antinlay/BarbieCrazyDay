@@ -9,17 +9,18 @@ import SwiftUI
 
 struct Shop: View {
     @EnvironmentObject private var router: Router
-    @State private var wallet = 10000
+    @EnvironmentObject private var defaultStorage: DefaultStorage
     @State private var price = 250
     @State private var startGame = false
+    @State private var isPayDisabled = false
     
     private var header: some View {
         VStack(alignment: .trailing, spacing: 0) {
             HStack {
-                HomeButon(action: {  router.navigate(to: .menu) })
+                HomeButon(action: {  router.navigate(to: GameViews.menu) })
                 .padding(.leading)
                 Spacer()
-                amountMoney(wallet)
+                Wallet()
                     .padding(.trailing)
             }
             TimeBoard()
@@ -30,8 +31,9 @@ struct Shop: View {
     private var chestGameButton: some View {
         Button {
             withAnimation {
+                isPayDisabled = true
                 startGame = true
-                wallet -= price
+                defaultStorage.wallet -= price
             }
         } label: {
             Image(.Shop.buyButton)
@@ -45,7 +47,7 @@ struct Shop: View {
                     }
                 }
         }
-        .disabled(startGame)
+        .disabled(isPayDisabled)
     }
     
     private var gameBoard: some View {
@@ -76,7 +78,7 @@ struct Shop: View {
                 Image(.Shop.barbie)
                 gameBoard
                     .padding(.top, -75)
-                ChestGame(start: startGame)
+                ChestGame(start: $startGame)
                     .frame(maxHeight: 150)
             }
             .alignmentPosition(.bottom)

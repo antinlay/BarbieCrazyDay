@@ -20,7 +20,7 @@ struct ContentView: View {
                 router.current.view
             }
         }
-        .animation(.default, value: router.current)
+        .animation(.interpolatingSpring, value: router.current)
     }
 }
 
