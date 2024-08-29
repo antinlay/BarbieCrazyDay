@@ -24,4 +24,14 @@ extension Color {
             endRadius: 66
         )
     }
+    
+    static var betBoardGradient: LinearGradient {
+        LinearGradient(
+            gradient: Gradient(colors: [Color(#colorLiteral(red: 0, green: 0.085, blue: 0.85, alpha: 1)), Color(#colorLiteral(red: 0.904, green: 0, blue: 0.814, alpha: 1))]),
+            startPoint: .top,
+            endPoint: .bottom
+        )
+    }
+    
+    static var shadowPinkColor = Color(#colorLiteral(red: 0.89, green: 0, blue: 0.965, alpha: 1))
 }

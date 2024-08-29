@@ -34,6 +34,10 @@
 		5C842E802C78DFDD00103584 /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C842E7F2C78DFDD00103584 /* Position.swift */; };
 		5C9E1A6D2C7FA3CD0090B49A /* QuestCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9E1A6C2C7FA3CD0090B49A /* QuestCases.swift */; };
 		5C9E1A6F2C7FA4010090B49A /* QuestContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9E1A6E2C7FA4010090B49A /* QuestContainer.swift */; };
+		5C9E1A722C8056E70090B49A /* ☀️SunnyDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9E1A712C8056E70090B49A /* ☀️SunnyDay.swift */; };
+		5C9E1A742C8057100090B49A /* 🗻SnowMountains.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9E1A732C8057100090B49A /* 🗻SnowMountains.swift */; };
+		5C9E1A762C8057490090B49A /* ⛈️ Thunderstorm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9E1A752C8057490090B49A /* ⛈️ Thunderstorm.swift */; };
+		5C9E1A792C80693C0090B49A /* 🤝BetBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9E1A782C80693C0090B49A /* 🤝BetBoard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +70,10 @@
 		5C842E7F2C78DFDD00103584 /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
 		5C9E1A6C2C7FA3CD0090B49A /* QuestCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestCases.swift; sourceTree = "<group>"; };
 		5C9E1A6E2C7FA4010090B49A /* QuestContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestContainer.swift; sourceTree = "<group>"; };
+		5C9E1A712C8056E70090B49A /* ☀️SunnyDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "☀️SunnyDay.swift"; sourceTree = "<group>"; };
+		5C9E1A732C8057100090B49A /* 🗻SnowMountains.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "🗻SnowMountains.swift"; sourceTree = "<group>"; };
+		5C9E1A752C8057490090B49A /* ⛈️ Thunderstorm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "⛈️ Thunderstorm.swift"; sourceTree = "<group>"; };
+		5C9E1A782C80693C0090B49A /* 🤝BetBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "🤝BetBoard.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +179,7 @@
 			children = (
 				5C842E7E2C78D2C300103584 /* Info.plist */,
 				5C842E792C78CDB300103584 /* 👋🏼Welcome.swift */,
+				5C9E1A702C8056800090B49A /* 🎰Games */,
 				5C0781042C7E2F67002C7F54 /* 💠Menu */,
 				5C9E1A6B2C7FA3A80090B49A /* 🍩Quests */,
 				5C0780F32C7DBE6F002C7F54 /* ℹ️Info.swift */,
@@ -216,6 +225,25 @@
 				5C9E1A6C2C7FA3CD0090B49A /* QuestCases.swift */,
 			);
 			path = "🍩Quests";
+			sourceTree = "<group>";
+		};
+		5C9E1A702C8056800090B49A /* 🎰Games */ = {
+			isa = PBXGroup;
+			children = (
+				5C9E1A712C8056E70090B49A /* ☀️SunnyDay.swift */,
+				5C9E1A732C8057100090B49A /* 🗻SnowMountains.swift */,
+				5C9E1A772C8065F40090B49A /* ⛈️ Thunderstorm */,
+			);
+			path = "🎰Games";
+			sourceTree = "<group>";
+		};
+		5C9E1A772C8065F40090B49A /* ⛈️ Thunderstorm */ = {
+			isa = PBXGroup;
+			children = (
+				5C9E1A752C8057490090B49A /* ⛈️ Thunderstorm.swift */,
+				5C9E1A782C80693C0090B49A /* 🤝BetBoard.swift */,
+			);
+			path = "⛈️ Thunderstorm";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -295,10 +323,12 @@
 				5C0780E92C7A55BE002C7F54 /* 💠Menu.swift in Sources */,
 				5C07810B2C7E5B16002C7F54 /* 🎲ChestGame.swift in Sources */,
 				5C0781122C7F4E56002C7F54 /* StoryResult.swift in Sources */,
+				5C9E1A722C8056E70090B49A /* ☀️SunnyDay.swift in Sources */,
 				5C0780FF2C7E0D51002C7F54 /* 🛍️Shop.swift in Sources */,
 				5C45B1CB2C78C75C00628C16 /* BarbieCrazyDayApp.swift in Sources */,
 				5C0780F02C7D0E1A002C7F54 /* 🍩Quests.swift in Sources */,
 				5C0780FD2C7DF0A2002C7F54 /* 🎚️Levels.swift in Sources */,
+				5C9E1A762C8057490090B49A /* ⛈️ Thunderstorm.swift in Sources */,
 				5C0781062C7E2F95002C7F54 /* 🕰️TimeBoard.swift in Sources */,
 				5C9E1A6D2C7FA3CD0090B49A /* QuestCases.swift in Sources */,
 				5C0780E72C790782002C7F54 /* Color.swift in Sources */,
@@ -311,7 +341,9 @@
 				5C842E7A2C78CDB300103584 /* 👋🏼Welcome.swift in Sources */,
 				5C0781032C7E2C35002C7F54 /* Component.swift in Sources */,
 				5C842E802C78DFDD00103584 /* Position.swift in Sources */,
+				5C9E1A792C80693C0090B49A /* 🤝BetBoard.swift in Sources */,
 				5C842E7D2C78D0FD00103584 /* Background.swift in Sources */,
+				5C9E1A742C8057100090B49A /* 🗻SnowMountains.swift in Sources */,
 				5C07810D2C7F2D5E002C7F54 /* 🪙Wallet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -34,8 +34,30 @@ public struct BoardBackground: ViewModifier {
                 RoundedRectangle(cornerRadius: 33)
                     .fill(
                         Color.descriptionGradient.opacity(0.85)
-                        .shadow(.inner(color: Color.boardShadow, radius: 64))
+                            .shadow(.inner(color: Color.boardShadow, radius: 64))
                     )
+            )
+    }
+    
+    public func body(content: Content) -> some View {
+        content
+            .padding(10)
+            .frame(maxWidth: .infinity)
+            .background(
+                background
+            )
+    }
+}
+
+public struct BetBoardBackground: ViewModifier {
+    private var background: some View {
+        RoundedRectangle(cornerRadius: 29)
+            .foregroundStyle(.clear)
+            .background(
+                RoundedRectangle(cornerRadius: 29)
+                    .fill(Color.betBoardGradient)
+                    .shadow(color: .white, radius: 23.06)
+                    .shadow(color: .white, radius: 17.3, y: 1.95)
             )
     }
     
@@ -51,4 +73,5 @@ public struct BoardBackground: ViewModifier {
 
 extension View {
     public var boardBackground: some View {  modifier(BoardBackground()) }
+    public var betBoardBackground: some View {  modifier(BetBoardBackground()) }
 }
