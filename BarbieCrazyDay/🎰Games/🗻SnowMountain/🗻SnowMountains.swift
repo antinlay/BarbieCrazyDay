@@ -31,6 +31,17 @@ enum DifficultyLevelCases: CaseIterable {
                 .Mountains.crazyButton
         }
     }
+    
+    var coefficient: [Double] {
+        switch self {
+        case .easy:
+            [1.28, 1.64, 2.10, 2.68, 3.44, 4.4, 5.63, 7.21]
+        case .hard:
+            [1.92, 3.69, 7.08, 13.58, 26.09, 50.1, 96.19, 184.68]
+        case .crazy:
+            [3.84, 14.62, 56.62, 217.43, 834.94, 3206.18, 12311.72, 47276.99]
+        }
+    }
 }
 
 struct SnowMountains: View {
@@ -51,6 +62,14 @@ struct SnowMountains: View {
         .shadow(color: .shadowPinkColor, radius: 1, x: 0, y: 5)
     }
     
+    private var changeLevel: some View {
+        Button {
+            isDifficltPresented = true
+        } label: {
+            Image(difficultLevelCases.info)
+        }
+    }
+    
     var body: some View {
         ZStack {
             betMultipluy
@@ -59,7 +78,7 @@ struct SnowMountains: View {
             HStack(spacing: 0) {
                 PauseButton { isPausePresented = true }
                     .padding(.leading)
-                Image(difficultLevelCases.info)
+                changeLevel
                 Spacer()
                 Wallet()
                     .padding(.trailing)
