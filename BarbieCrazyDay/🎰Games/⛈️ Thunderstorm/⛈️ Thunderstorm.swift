@@ -19,6 +19,7 @@ struct Thunderstorm: View {
         }
             .font(.cherryBombOne(.regular, size: 50))
             .foregroundColor(.white)
+            .strokeText(width: 1, color: .shadowPinkColor)
             .shadow(color: .shadowPinkColor, radius: 1, x: 0, y: 5)
     }
     
@@ -41,26 +42,8 @@ struct Thunderstorm: View {
                 .alignmentPosition(.bottom)
         }
         .modifier(AppBackground(.Thunderstorm.background))
-        .fullScreenCover(isPresented: $isPausePresented) {
-                pauseSheet
-                    .presentationBackground(.ultraThinMaterial)
-        }
+        .pauseSheet(isPresented: $isPausePresented)
     }
-    
-    private var pauseSheet: some View {
-        VStack(spacing: -65) {
-            Image(.Thunderstorm.candyBall)
-            VStack(spacing: 5) {
-                SheetContinueButton {
-                    isPausePresented = false
-                }
-                SheetHomeButton {
-                    router.navigate(to: .menu)
-                }
-            }
-        }
-    }
-    
 }
 
 #Preview {

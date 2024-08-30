@@ -16,8 +16,38 @@ public struct TextOnBoardStyle: ViewModifier {
     }
 }
 
-extension View {
-    public var textOnBoardStyle: some View {
-        modifier(TextOnBoardStyle())
+public struct PauseSheet: ViewModifier {
+    @EnvironmentObject private var router: Router
+    @Binding var isPresented: Bool
+    
+    private var pauseSheet: some View {
+        VStack(spacing: -65) {
+            Image(.Thunderstorm.candyBall)
+            VStack(spacing: 5) {
+                SheetContinueButton {
+                    isPresented = false
+                }
+                SheetHowToButton {
+                    router.navigate(to: .menu)
+                }
+                SheetHomeButton {
+                    router.navigate(to: .menu)
+                }
+            }
+        }
     }
+
+    public func body(content: Content) -> some View {
+        content
+            .fullScreenCover(isPresented: $isPresented) {
+                    pauseSheet
+                        .presentationBackground(.ultraThinMaterial)
+            }
+
+    }
+}
+
+extension View {
+    public var textOnBoardStyle: some View { modifier(TextOnBoardStyle()) }
+    public func pauseSheet(isPresented: Binding<Bool>) -> some View { modifier(PauseSheet(isPresented: isPresented)) }
 }

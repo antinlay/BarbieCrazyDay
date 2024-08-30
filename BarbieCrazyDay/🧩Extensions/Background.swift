@@ -71,7 +71,40 @@ public struct BetBoardBackground: ViewModifier {
     }
 }
 
+public struct StrokeText : ViewModifier {
+    private let id = UUID()
+    var width: Double
+    var color: Color
+    
+    public func body(content: Content) -> some View {
+        content
+            .padding(width*2)
+            .background(
+                Rectangle()
+                    .foregroundStyle(color)
+                    .mask({
+                        outline(context: content)
+                    })
+            )
+    }
+    
+    public func outline(context:Content) -> some View {
+        Canvas { context, size in
+            context.addFilter(.alphaThreshold(min: 0.01))
+            context.drawLayer { layer in
+                if let text = context.resolveSymbol(id: id) {
+                    layer.draw(text, at: .init(x: size.width/2, y: size.height/2))
+                }
+            }
+        } symbols: {
+            context.tag(id)
+                .blur(radius: width)
+        }
+    }
+}
+
 extension View {
     public var boardBackground: some View {  modifier(BoardBackground()) }
     public var betBoardBackground: some View {  modifier(BetBoardBackground()) }
+    public func strokeText(width: Double, color: Color) -> some View {  modifier(StrokeText(width: width, color: color)) }
 }

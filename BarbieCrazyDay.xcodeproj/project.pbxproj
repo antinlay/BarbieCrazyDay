@@ -231,7 +231,7 @@
 			isa = PBXGroup;
 			children = (
 				5C9E1A712C8056E70090B49A /* ☀️SunnyDay.swift */,
-				5C9E1A732C8057100090B49A /* 🗻SnowMountains.swift */,
+				5C9F66FC2C81C1C400623D86 /* 🗻SnowMountain */,
 				5C9E1A772C8065F40090B49A /* ⛈️ Thunderstorm */,
 			);
 			path = "🎰Games";
@@ -244,6 +244,14 @@
 				5C9E1A782C80693C0090B49A /* 🤝BetBoard.swift */,
 			);
 			path = "⛈️ Thunderstorm";
+			sourceTree = "<group>";
+		};
+		5C9F66FC2C81C1C400623D86 /* 🗻SnowMountain */ = {
+			isa = PBXGroup;
+			children = (
+				5C9E1A732C8057100090B49A /* 🗻SnowMountains.swift */,
+			);
+			path = "🗻SnowMountain";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
