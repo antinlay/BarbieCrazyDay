@@ -12,14 +12,16 @@ struct BetBoard: View {
     @State var isGameStarted = false
     @State var actionButtonDisabled = false
     @State var descriptionText = "place a bet and press deal".uppercased()
+    private var minBet = 1000
+    private var maxBet = 10_000
     
     private var betInfo: some View {
         VStack(spacing: 8) {
             Text("YOUR BET:")
                 .font(.cherryBombOne(.regular, size: 20))
             VStack(spacing: 0) {
-                Text("MIN BET: 1000")
-                Text("MAX BET: 10000")
+                Text("MIN BET: ") + Text(minBet, format: .number)
+                Text("MAX BET: ") + Text(maxBet, format: .number)
             }
             .font(.cherryBombOne(.regular, size: 13))
         }
@@ -61,6 +63,15 @@ struct BetBoard: View {
             .betBoardBackground
             .padding(.horizontal, 24)
         }
+        .onChange(of: bet) { newValue in
+            if let newValue = newValue, newValue < minBet || newValue > maxBet {
+                actionButtonDisabled = true
+            }
+        }
+        .onAppear {
+            if bet == nil { actionButtonDisabled = true }
+        }
+
     }
     
     private var actionButton: some View {

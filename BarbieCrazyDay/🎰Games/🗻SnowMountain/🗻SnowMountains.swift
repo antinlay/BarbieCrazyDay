@@ -7,39 +7,28 @@
 
 import SwiftUI
 
-enum DifficultyLevelCases: CaseIterable {
-    case easy, hard, crazy
-    
-    var info: ImageResource {
-        switch self {
-        case .easy:
-                .Mountains.easyLevel
-        case .hard:
-                .Mountains.hardLevel
-        case .crazy:
-                .Mountains.crazyLevel
-        }
-    }
-    
-    var button: ImageResource {
-        switch self {
-        case .easy:
-                .Mountains.easyButton
-        case .hard:
-                .Mountains.hardButton
-        case .crazy:
-                .Mountains.crazyButton
-        }
-    }
-    
-    var coefficient: [Double] {
-        switch self {
-        case .easy:
-            [1.28, 1.64, 2.10, 2.68, 3.44, 4.4, 5.63, 7.21]
-        case .hard:
-            [1.92, 3.69, 7.08, 13.58, 26.09, 50.1, 96.19, 184.68]
-        case .crazy:
-            [3.84, 14.62, 56.62, 217.43, 834.94, 3206.18, 12311.72, 47276.99]
+extension SnowMountains {
+    struct CoefficientButton: View {
+        var item: ImageResource
+        var coefficient: Double
+        var placeholder: ImageResource = .Mountains.actionButton
+        @State var isOpen = false
+        var action: () -> Void
+        
+        var body: some View {
+            Button {
+                isOpen = true
+                action()
+            } label: {
+                ZStack {
+                    Image(item)
+                        .opacity(isOpen ? 1 : 0)
+                    Image(placeholder)
+                        .opacity(isOpen ? 0 : 1)
+                }
+                .scaleEffect(isOpen ? 1.3 : 1)
+            }
+            .disabled(isOpen)
         }
     }
 }
@@ -48,18 +37,19 @@ struct SnowMountains: View {
     @State var difficultLevelCases: DifficultyLevelCases = .easy
     @EnvironmentObject private var router: Router
     @State private var isPausePresented = false
-    @State private var multiplyNumber = 0
+    @State private var multiplyNumber: Double = 0
     @State private var isDifficltPresented = false
+    @State private var gameStarted = false
     
     private var betMultipluy: some View {
         Group {
             Text("x") +
             Text(multiplyNumber, format: .number)
         }
-        .font(.cherryBombOne(.regular, size: 50))
+        .font(.cherryBombOne(.regular, size: 25))
         .foregroundColor(.white)
-        .strokeText(width: 1, color: .shadowPinkColor)
-        .shadow(color: .shadowPinkColor, radius: 1, x: 0, y: 5)
+        .strokeText(width: 0.5, color: .shadowPinkColor)
+        .shadow(color: .shadowPinkColor, radius: 0.5, x: 0, y: 5)
     }
     
     private var changeLevel: some View {
@@ -97,32 +87,21 @@ struct SnowMountains: View {
     
     private var gameGrid: some View {
         LazyHGrid(rows: Array(repeating: GridItem(.fixed(60)), count: 8)) {
-            ForEach(difficultLevelCases.coefficient, id: \.self) { coefficient in
-                rowCoefficient(coefficient, repeate: repeateCoefficient)
+            ForEach(Array(difficultLevelCases.coefficient.enumerated()), id: \.offset) { index, coefficient in
+                rowCoefficient(coefficient)
             }
         }
     }
     
-    private func rowCoefficient(_ coefficient: Double, repeate: Int) -> some View {
-        LazyHStack {
-            ForEach(Array(repeating: coefficient, count: repeate).indices, id: \.self) { coeff in
-                Button {
-                    
-                } label: {
-                    Image(.Mountains.actionButton)
+    private func rowCoefficient(_ coefficient: Double) -> some View {
+        LazyHStack(spacing: 0) {
+            ForEach(difficultLevelCases.items, id: \.self) { item in
+                CoefficientButton(item: item, coefficient: coefficient) {
+                    multiplyNumber += item == .SunnyDay.bomb ? 0 : coefficient
                 }
+                .opacity(gameStarted ? 1 : 0.5)
+                .disabled(!gameStarted)
             }
-        }
-    }
-    
-    private var repeateCoefficient: Int {
-        switch difficultLevelCases {
-        case .easy:
-            4
-        case .hard:
-            2
-        case .crazy:
-            4
         }
     }
     
