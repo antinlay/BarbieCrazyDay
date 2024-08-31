@@ -72,27 +72,58 @@ struct SnowMountains: View {
     
     var body: some View {
         ZStack {
-            betMultipluy
+            VStack {
+                HStack(spacing: 0) {
+                    PauseButton { isPausePresented = true }
+                        .padding(.leading)
+                    changeLevel
+                    Spacer()
+                    Wallet()
+                        .padding(.trailing)
+                }
                 .alignmentPosition(.top)
-                .padding(.top, 45)
-            HStack(spacing: 0) {
-                PauseButton { isPausePresented = true }
-                    .padding(.leading)
-                changeLevel
-                Spacer()
-                Wallet()
-                    .padding(.trailing)
+                gameGrid
+                    .alignmentPosition(.center)
+                BetBoard()
+                    .alignmentPosition(.bottom)
             }
-            .alignmentPosition(.top)
-            BetBoard()
-                .alignmentPosition(.bottom)
-            
         }.modifier(AppBackground(.Mountains.background))
             .pauseSheet(isPresented: $isPausePresented)
             .fullScreenCover(isPresented: $isDifficltPresented) {
                 difficultLevel
-                        .presentationBackground(.ultraThinMaterial)
+                    .presentationBackground(.ultraThinMaterial)
             }
+    }
+    
+    private var gameGrid: some View {
+        LazyHGrid(rows: Array(repeating: GridItem(.fixed(60)), count: 8)) {
+            ForEach(difficultLevelCases.coefficient, id: \.self) { coefficient in
+                rowCoefficient(coefficient, repeate: repeateCoefficient)
+            }
+        }
+    }
+    
+    private func rowCoefficient(_ coefficient: Double, repeate: Int) -> some View {
+        LazyHStack {
+            ForEach(Array(repeating: coefficient, count: repeate).indices, id: \.self) { coeff in
+                Button {
+                    
+                } label: {
+                    Image(.Mountains.actionButton)
+                }
+            }
+        }
+    }
+    
+    private var repeateCoefficient: Int {
+        switch difficultLevelCases {
+        case .easy:
+            4
+        case .hard:
+            2
+        case .crazy:
+            4
+        }
     }
     
     private var difficultLevel: some View {
@@ -112,7 +143,7 @@ struct SnowMountains: View {
             }
         }
     }
-
+    
 }
 
 #Preview {
