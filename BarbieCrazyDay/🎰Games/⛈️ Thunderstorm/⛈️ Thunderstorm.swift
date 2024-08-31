@@ -10,6 +10,7 @@ import SwiftUI
 struct Thunderstorm: View {
     @EnvironmentObject private var router: Router
     @State private var isPausePresented = false
+    @State private var isHowToPresented = false
     @State private var multiplyNumber = 0
     
     private var betMultipluy: some View {
@@ -42,7 +43,11 @@ struct Thunderstorm: View {
                 .alignmentPosition(.bottom)
         }
         .modifier(AppBackground(.Thunderstorm.background))
-        .pauseSheet(isPresented: $isPausePresented)
+        .pauseSheet(isPresented: $isPausePresented) {
+            isPausePresented = false
+            isHowToPresented = true
+        }
+        .howToSheet(isPresented: $isHowToPresented, title: Thunderstorm.howToTitle, text: Thunderstorm.howToText)
     }
 }
 

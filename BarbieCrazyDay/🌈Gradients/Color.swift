@@ -33,5 +33,16 @@ extension Color {
         )
     }
     
+    static var walletGradient: LinearGradient {
+        LinearGradient(
+            gradient: Gradient(colors: [Color(#colorLiteral(red: 0, green: 0.28, blue: 1, alpha: 1)), Color(#colorLiteral(red: 0, green: 0.168, blue: 0.6, alpha: 1))]),
+            startPoint: .top,
+            endPoint: .bottom
+        )
+
+    }
+    
     static var shadowPinkColor = Color(#colorLiteral(red: 0.89, green: 0, blue: 0.965, alpha: 1))
+    
+    static var borderWalletColor = Color(#colorLiteral(red: 0.146, green: 0.846, blue: 1, alpha: 1))
 }

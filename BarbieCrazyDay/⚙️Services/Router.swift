@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum GameViews {
-    case welcome, menu, quests, games, shop, thundershtorm, mountains, sunnyDay, levels, info
+    case welcome, menu, quests, games, shop, thundershtorm, mountains, sunnyDay, levels, info, timeBoard
     
     @ViewBuilder var view: some View {
         switch self {
@@ -19,21 +19,21 @@ enum GameViews {
         case .quests:
             Quests()
         case .games:
-            GameMenu()
+            Games()
         case .shop:
             Shop()
         case .thundershtorm:
-            GameMenu()
-
+            Thunderstorm()
         case .mountains:
-            GameMenu()
-
+            SnowMountains()
         case .sunnyDay:
-            GameMenu()
+            SunnyDay()
         case .levels:
             Levels()
         case .info:
             Info()
+        case .timeBoard:
+            TimeBoard()
         }
     }
     

@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct TimeBoard: View {
+    @AppStorage(DefaultStorage.Key.wallet.rawValue) private var wallet = 10_000
+    @EnvironmentObject private var defaultStorage: DefaultStorage
     @State private var dateUntil: Date = .now
     @State private var isDisabledNowReward: Bool = true
     @State private var isDisabledReward: Bool = true
@@ -15,9 +17,6 @@ struct TimeBoard: View {
     private var nowReward = 300
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    
-    private var defaultStorage = DefaultStorage()
-    
     
     private var isTimerStopped: Bool { dateUntil < Date.now }
     
@@ -65,36 +64,39 @@ struct TimeBoard: View {
     
     
     private var timeBoard: some View {
-        Image(.Menu.timeBoard)
-            .overlay(alignment: .bottom) {
-                Group {
-                    switch isTimerStopped {
-                    case true:
-                        takeButton
-                    case false:
-                        takeNowButton
-                    }
+        ZStack {
+            VStack(spacing: 0) {
+                HStack(spacing: 1) {
+                    Text(reward, format: .number)
+                        .font(.cherryBombOne(.regular, size: 15))
+                        .foregroundStyle(.white)
+                        .shadow(color: .fontShadow, radius: 4, x: 0, y: 4)
+                    Image(.Menu.almazRounded)
                 }
-                .padding(.bottom, -16)
-            }
-            .overlay {
-                VStack(spacing: 0) {
-                    HStack(spacing: 1) {
-                        Text(reward, format: .number)
-                            .font(.cherryBombOne(.regular, size: 15))
-                            .foregroundStyle(.white)
-                            .shadow(color: .fontShadow, radius: 4, x: 0, y: 4)
-                        Image(.Menu.almazRounded)
-                    }
-                    if !isTimerStopped {
-                        Text(dateUntil, style: .timer)
-                            .font(.cherryBombOne(.regular, size: 12))
-                            .foregroundStyle(.white)
-                            .shadow(color: .fontShadow, radius: 4, x: 0, y: 4)
-                    }
+                .padding(.top, 13)
+                .padding(.horizontal, 28)
+                if !isTimerStopped {
+                    Text(dateUntil, style: .timer)
+                        .font(.cherryBombOne(.regular, size: 12))
+                        .foregroundStyle(.white)
+                        .shadow(color: .fontShadow, radius: 4, x: 0, y: 4)
                 }
-                .padding(.bottom, 8)
             }
+            .padding(.bottom, 28)
+        }
+        .timeBoardBackground
+        .overlay(alignment: .bottom) {
+            Group {
+                switch isTimerStopped {
+                case true:
+                    takeButton
+                case false:
+                    takeNowButton
+                }
+            }
+            .padding(.bottom, -16)
+
+        }
     }
     
     var body: some View {
@@ -109,14 +111,14 @@ struct TimeBoard: View {
         if let dateFuture = Calendar.current.date(byAdding: .hour, value: 12, to: .now) {
             defaultStorage.rewardDate = dateFuture
             dateUntil = dateFuture
-            defaultStorage.wallet += reward
+            wallet += reward
             isDisabledReward = true
         }
     }
     
     private func getRewardNow() {
         defaultStorage.nowReward = true
-        defaultStorage.wallet += nowReward
+        wallet += nowReward
         isDisabledNowReward = true
     }
     

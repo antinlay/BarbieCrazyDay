@@ -43,7 +43,7 @@ struct GameMenu: View {
                     }
                     .padding(.trailing, 10)
                     Button {
-                        router.navigate(to: GameViews.shop)
+                        router.navigate(to: GameViews.games)
                     } label: {
                         Image(.Menu.gamesButton)
                             .overlay(alignment: .bottom) {

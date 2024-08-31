@@ -20,8 +20,43 @@ public struct AppBackground: ViewModifier {
     }
 }
 
+public struct TimeBoardBackground: ViewModifier {
+    private var timeBoardRectangle: some View {
+        RoundedRectangle(cornerRadius: 21.5)
+            .stroke(Color.borderWalletColor, lineWidth: 2)
+            .background(
+                RoundedRectangle(cornerRadius: 21.5)
+                    .fill(Color.walletGradient)
+            )
+    }
+    
+    public func body(content: Content) -> some View {
+        content
+            .background(timeBoardRectangle)
+    }
+}
+
+
+public struct WalletBackground: ViewModifier {
+    private var walletCapsule: some View {
+        Capsule()
+            .stroke(Color.borderWalletColor, lineWidth: 2)
+            .background(
+                Capsule()
+                    .fill(Color.walletGradient)
+            )
+    }
+    
+    public func body(content: Content) -> some View {
+        content
+            .padding(.vertical, 7)
+            .padding(.horizontal)
+            .background(walletCapsule)
+    }
+}
+
 public struct BoardBackground: ViewModifier {
-    private var background: some View {
+    private var boardRectangle: some View {
         RoundedRectangle(cornerRadius: 33)
             .stroke(Color.white,
                     style: StrokeStyle(lineWidth: 7,
@@ -43,14 +78,12 @@ public struct BoardBackground: ViewModifier {
         content
             .padding(10)
             .frame(maxWidth: .infinity)
-            .background(
-                background
-            )
+            .background(boardRectangle)
     }
 }
 
 public struct BetBoardBackground: ViewModifier {
-    private var background: some View {
+    private var betBoardRectagle: some View {
         RoundedRectangle(cornerRadius: 29)
             .foregroundStyle(.clear)
             .background(
@@ -65,9 +98,7 @@ public struct BetBoardBackground: ViewModifier {
         content
             .padding(10)
             .frame(maxWidth: .infinity)
-            .background(
-                background
-            )
+            .background(betBoardRectagle)
     }
 }
 
@@ -104,7 +135,10 @@ public struct StrokeText : ViewModifier {
 }
 
 extension View {
-    public var boardBackground: some View {  modifier(BoardBackground()) }
-    public var betBoardBackground: some View {  modifier(BetBoardBackground()) }
+    public var boardBackground: some View { modifier(BoardBackground()) }
+    public var betBoardBackground: some View { modifier(BetBoardBackground()) }
+    public var walletBackground: some View { modifier(WalletBackground()) }
+    public var timeBoardBackground: some View { modifier(TimeBoardBackground()) }
+
     public func strokeText(width: Double, color: Color) -> some View {  modifier(StrokeText(width: width, color: color)) }
 }

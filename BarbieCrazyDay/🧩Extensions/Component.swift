@@ -16,9 +16,50 @@ public struct TextOnBoardStyle: ViewModifier {
     }
 }
 
+public struct HowToSheet: ViewModifier {
+    @Binding var isPresented: Bool
+    var title: String
+    var text: String
+    
+    private var howToSheet: some View {
+        VStack {
+            Text(title.uppercased())
+                .font(.cherryBombOne(.regular, size: 25))
+                .foregroundStyle(.accent)
+            Text(text)
+                .font(.cherryBombOne(.regular, size: 11))
+                .foregroundColor(.white)
+                .shadow(color: .fontShadow, radius: 4, x: 0, y: 4)
+            Text("GOOD LUCK!")
+                .font(.cherryBombOne(.regular, size: 25))
+                .foregroundStyle(.accent)
+        }
+        .padding(.horizontal, 10)
+        .boardBackground
+        .overlay(alignment: .topTrailing) {
+            Button {
+                isPresented = false
+            } label: {
+                Image(.Thunderstorm.xButon)
+            }
+            .offset(x: 10, y: -10)
+        }
+        .padding(.horizontal)
+    }
+    
+    public func body(content: Content) -> some View {
+        content
+            .fullScreenCover(isPresented: $isPresented) {
+                howToSheet
+                    .presentationBackground(.ultraThinMaterial)
+            }
+    }
+}
+
 public struct PauseSheet: ViewModifier {
     @EnvironmentObject private var router: Router
     @Binding var isPresented: Bool
+    var howTowAction: () -> Void
     
     private var pauseSheet: some View {
         VStack(spacing: -65) {
@@ -28,7 +69,7 @@ public struct PauseSheet: ViewModifier {
                     isPresented = false
                 }
                 SheetHowToButton {
-                    router.navigate(to: .menu)
+                    howTowAction()
                 }
                 SheetHomeButton {
                     router.navigate(to: .menu)
@@ -43,11 +84,11 @@ public struct PauseSheet: ViewModifier {
                     pauseSheet
                         .presentationBackground(.ultraThinMaterial)
             }
-
     }
 }
 
 extension View {
     public var textOnBoardStyle: some View { modifier(TextOnBoardStyle()) }
-    public func pauseSheet(isPresented: Binding<Bool>) -> some View { modifier(PauseSheet(isPresented: isPresented)) }
+    public func howToSheet(isPresented: Binding<Bool>, title: String, text: String) -> some View { modifier(HowToSheet(isPresented: isPresented, title: title, text: text))}
+    public func pauseSheet(isPresented: Binding<Bool>, howTowAction: @escaping () -> Void) -> some View { modifier(PauseSheet(isPresented: isPresented, howTowAction: howTowAction)) }
 }

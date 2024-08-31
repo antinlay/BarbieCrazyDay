@@ -37,9 +37,11 @@ struct SnowMountains: View {
     @State var difficultLevelCases: DifficultyLevelCases = .easy
     @EnvironmentObject private var router: Router
     @State private var isPausePresented = false
+    @State private var isHowToPresented = false
+    @State private var isDifficultPresented = false
+
     @State private var multiplyNumber: Double = 0
-    @State private var isDifficltPresented = false
-    @State private var gameStarted = false
+    @State private var gameStarted = true
     
     private var betMultipluy: some View {
         Group {
@@ -54,7 +56,7 @@ struct SnowMountains: View {
     
     private var changeLevel: some View {
         Button {
-            isDifficltPresented = true
+            isDifficultPresented = true
         } label: {
             Image(difficultLevelCases.info)
         }
@@ -78,8 +80,12 @@ struct SnowMountains: View {
                     .alignmentPosition(.bottom)
             }
         }.modifier(AppBackground(.Mountains.background))
-            .pauseSheet(isPresented: $isPausePresented)
-            .fullScreenCover(isPresented: $isDifficltPresented) {
+            .pauseSheet(isPresented: $isPausePresented) {
+                isPausePresented = false
+                isHowToPresented = true
+            }
+            .howToSheet(isPresented: $isHowToPresented, title: SnowMountains.howToTitle, text: SnowMountains.howToText)
+            .fullScreenCover(isPresented: $isDifficultPresented) {
                 difficultLevel
                     .presentationBackground(.ultraThinMaterial)
             }
@@ -115,7 +121,7 @@ struct SnowMountains: View {
             ForEach(DifficultyLevelCases.allCases, id: \.self) { difficult in
                 Button {
                     difficultLevelCases = difficult
-                    isDifficltPresented = false
+                    isDifficultPresented = false
                 } label: {
                     Image(difficult.button)
                 }

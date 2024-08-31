@@ -39,6 +39,9 @@
 		5C9E1A762C8057490090B49A /* ⛈️ Thunderstorm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9E1A752C8057490090B49A /* ⛈️ Thunderstorm.swift */; };
 		5C9E1A792C80693C0090B49A /* 🤝BetBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9E1A782C80693C0090B49A /* 🤝BetBoard.swift */; };
 		5C9F67002C83411200623D86 /* DiificultyLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9F66FF2C83411200623D86 /* DiificultyLevel.swift */; };
+		5C9F67022C83ABB500623D86 /* 🎰Games.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9F67012C83ABB500623D86 /* 🎰Games.swift */; };
+		5C9F67042C83BDFB00623D86 /* ❓HowToText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9F67032C83BDFB00623D86 /* ❓HowToText.swift */; };
+		5C9F67062C83C1DE00623D86 /* 🏆Winner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9F67052C83C1DE00623D86 /* 🏆Winner.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +79,9 @@
 		5C9E1A752C8057490090B49A /* ⛈️ Thunderstorm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "⛈️ Thunderstorm.swift"; sourceTree = "<group>"; };
 		5C9E1A782C80693C0090B49A /* 🤝BetBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "🤝BetBoard.swift"; sourceTree = "<group>"; };
 		5C9F66FF2C83411200623D86 /* DiificultyLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiificultyLevel.swift; sourceTree = "<group>"; };
+		5C9F67012C83ABB500623D86 /* 🎰Games.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "🎰Games.swift"; sourceTree = "<group>"; };
+		5C9F67032C83BDFB00623D86 /* ❓HowToText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "❓HowToText.swift"; sourceTree = "<group>"; };
+		5C9F67052C83C1DE00623D86 /* 🏆Winner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "🏆Winner.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,8 +239,11 @@
 			isa = PBXGroup;
 			children = (
 				5C9E1A712C8056E70090B49A /* ☀️SunnyDay.swift */,
+				5C9F67032C83BDFB00623D86 /* ❓HowToText.swift */,
+				5C9F67052C83C1DE00623D86 /* 🏆Winner.swift */,
 				5C9F66FC2C81C1C400623D86 /* 🗻SnowMountain */,
 				5C9E1A772C8065F40090B49A /* ⛈️ Thunderstorm */,
+				5C9F67012C83ABB500623D86 /* 🎰Games.swift */,
 			);
 			path = "🎰Games";
 			sourceTree = "<group>";
@@ -332,6 +341,7 @@
 				5C0780F22C7DB977002C7F54 /* Router.swift in Sources */,
 				5C45B1CD2C78C75C00628C16 /* ContentView.swift in Sources */,
 				5C9F67002C83411200623D86 /* DiificultyLevel.swift in Sources */,
+				5C9F67022C83ABB500623D86 /* 🎰Games.swift in Sources */,
 				5C0780E92C7A55BE002C7F54 /* 💠Menu.swift in Sources */,
 				5C07810B2C7E5B16002C7F54 /* 🎲ChestGame.swift in Sources */,
 				5C0781122C7F4E56002C7F54 /* StoryResult.swift in Sources */,
@@ -349,9 +359,11 @@
 				5C9E1A6F2C7FA4010090B49A /* QuestContainer.swift in Sources */,
 				5C0781012C7E2926002C7F54 /* Button.swift in Sources */,
 				5C0781102C7F2F8F002C7F54 /* Story.swift in Sources */,
+				5C9F67062C83C1DE00623D86 /* 🏆Winner.swift in Sources */,
 				5C0780DF2C7900B4002C7F54 /* Custom.swift in Sources */,
 				5C842E7A2C78CDB300103584 /* 👋🏼Welcome.swift in Sources */,
 				5C0781032C7E2C35002C7F54 /* Component.swift in Sources */,
+				5C9F67042C83BDFB00623D86 /* ❓HowToText.swift in Sources */,
 				5C842E802C78DFDD00103584 /* Position.swift in Sources */,
 				5C9E1A792C80693C0090B49A /* 🤝BetBoard.swift in Sources */,
 				5C842E7D2C78D0FD00103584 /* Background.swift in Sources */,
