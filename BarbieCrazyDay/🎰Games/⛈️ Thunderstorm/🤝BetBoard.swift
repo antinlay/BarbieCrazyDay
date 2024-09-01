@@ -82,7 +82,7 @@ struct BetBoard: View {
             case true:
                 Text("place a bet and press deal".uppercased())
             case false:
-                Text("your current winnings: ") + Text(betModel.currentWinning, format: .number)
+                Text("your current winnings: ".uppercased()) + Text(betModel.currentWinning, format: .number)
             }
         }
             .textOnBoardStyle
