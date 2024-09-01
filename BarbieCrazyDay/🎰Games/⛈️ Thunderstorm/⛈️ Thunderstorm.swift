@@ -9,14 +9,14 @@ import SwiftUI
 
 struct Thunderstorm: View {
     @EnvironmentObject private var router: Router
+    @EnvironmentObject private var betModel: BetModel
     @State private var isPausePresented = false
     @State private var isHowToPresented = false
-    @State private var multiplyNumber = 0
     
     private var betMultipluy: some View {
         Group {
             Text("x") +
-            Text(multiplyNumber, format: .number)
+            Text(betModel.multiplyNumber, format: .number)
         }
             .font(.cherryBombOne(.regular, size: 50))
             .foregroundColor(.white)
@@ -53,4 +53,5 @@ struct Thunderstorm: View {
 
 #Preview {
     Thunderstorm()
+        .environmentObject(BetModel())
 }

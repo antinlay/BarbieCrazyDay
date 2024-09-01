@@ -42,6 +42,7 @@
 		5C9F67022C83ABB500623D86 /* 🎰Games.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9F67012C83ABB500623D86 /* 🎰Games.swift */; };
 		5C9F67042C83BDFB00623D86 /* ❓HowToText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9F67032C83BDFB00623D86 /* ❓HowToText.swift */; };
 		5C9F67062C83C1DE00623D86 /* 🏆Winner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9F67052C83C1DE00623D86 /* 🏆Winner.swift */; };
+		5C9F670A2C84600500623D86 /* BetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9F67092C84600500623D86 /* BetModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +83,7 @@
 		5C9F67012C83ABB500623D86 /* 🎰Games.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "🎰Games.swift"; sourceTree = "<group>"; };
 		5C9F67032C83BDFB00623D86 /* ❓HowToText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "❓HowToText.swift"; sourceTree = "<group>"; };
 		5C9F67052C83C1DE00623D86 /* 🏆Winner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "🏆Winner.swift"; sourceTree = "<group>"; };
+		5C9F67092C84600500623D86 /* BetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,6 +240,7 @@
 		5C9E1A702C8056800090B49A /* 🎰Games */ = {
 			isa = PBXGroup;
 			children = (
+				5C9F67082C845FF200623D86 /* Models */,
 				5C9E1A712C8056E70090B49A /* ☀️SunnyDay.swift */,
 				5C9F67032C83BDFB00623D86 /* ❓HowToText.swift */,
 				5C9F67052C83C1DE00623D86 /* 🏆Winner.swift */,
@@ -264,6 +267,14 @@
 				5C9F66FF2C83411200623D86 /* DiificultyLevel.swift */,
 			);
 			path = "🗻SnowMountain";
+			sourceTree = "<group>";
+		};
+		5C9F67082C845FF200623D86 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5C9F67092C84600500623D86 /* BetModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -359,6 +370,7 @@
 				5C9E1A6F2C7FA4010090B49A /* QuestContainer.swift in Sources */,
 				5C0781012C7E2926002C7F54 /* Button.swift in Sources */,
 				5C0781102C7F2F8F002C7F54 /* Story.swift in Sources */,
+				5C9F670A2C84600500623D86 /* BetModel.swift in Sources */,
 				5C9F67062C83C1DE00623D86 /* 🏆Winner.swift in Sources */,
 				5C0780DF2C7900B4002C7F54 /* Custom.swift in Sources */,
 				5C842E7A2C78CDB300103584 /* 👋🏼Welcome.swift in Sources */,

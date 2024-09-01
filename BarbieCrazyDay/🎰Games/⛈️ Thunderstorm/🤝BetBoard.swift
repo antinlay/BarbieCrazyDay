@@ -8,20 +8,16 @@
 import SwiftUI
 
 struct BetBoard: View {
-    @State var bet: Int?
-    @State var isGameStarted = false
-    @State var actionButtonDisabled = false
-    @State var descriptionText = "place a bet and press deal".uppercased()
-    private var minBet = 1000
-    private var maxBet = 10_000
+    @EnvironmentObject private var betModel: BetModel
+    @State var actionButtonDisabled = true
     
     private var betInfo: some View {
         VStack(spacing: 8) {
             Text("YOUR BET:")
                 .font(.cherryBombOne(.regular, size: 20))
             VStack(spacing: 0) {
-                Text("MIN BET: ") + Text(minBet, format: .number)
-                Text("MAX BET: ") + Text(maxBet, format: .number)
+                Text("MIN BET: ") + Text(betModel.minBet, format: .number)
+                Text("MAX BET: ") + Text(betModel.maxBet, format: .number)
             }
             .font(.cherryBombOne(.regular, size: 13))
         }
@@ -36,73 +32,77 @@ struct BetBoard: View {
                     .offset(x: 12, y: 2)
             }
             .overlay {
-                TextField("...", value: $bet, format: .number)
+                TextField("...", value: $betModel.bet, format: .number)
                     .keyboardType(.decimalPad)
                     .font(.cherryBombOne(.regular, size: 20))
                     .foregroundStyle(.gray)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal)
-                    .disabled(isGameStarted)
+                    .disabled(betModel.isGameStarted)
             }
     }
-
+    
     var body: some View {
         VStack {
-            Text(descriptionText)
-                .textOnBoardStyle
+            gameDescription
             HStack(alignment: .top, spacing: 15) {
                 betInfo
                 
                 VStack(spacing: 0) {
                     betTextField
-                    actionButton
-                        .disabled(actionButtonDisabled)
-                        .grayscale(actionButtonDisabled ? 1 : .zero)
+                    Group {
+                        switch betModel.isGameStarted {
+                        case false:
+                            dealButton
+                        case true:
+                            takeButton
+                                .disabled(betModel.multiplyNumber == 0)
+                                .grayscale(betModel.multiplyNumber == 0 ? 1 : 0)
+                        }
+                    }
+                    .disabled(actionButtonDisabled)
+                    .grayscale(actionButtonDisabled ? 1 : .zero)
                 }
             }
             .betBoardBackground
             .padding(.horizontal, 24)
         }
-        .onChange(of: bet) { newValue in
-            if let newValue = newValue, newValue < minBet || newValue > maxBet {
+        .onChange(of: betModel.bet) { newValue in
+            if let newValue = newValue, newValue < betModel.minBet || newValue > betModel.maxBet {
                 actionButtonDisabled = true
-            }
-        }
-        .onAppear {
-            if bet == nil { actionButtonDisabled = true }
-        }
-
-    }
-    
-    private var actionButton: some View {
-        Button {
-            if isGameStarted {
-                takeButtonPressed()
             } else {
-                dealButtonPressed()
+                actionButtonDisabled = false
             }
-        } label: {
-            Image(.Games.actionButton)
-                .overlay(alignment: .top) {
-                    Text(isGameStarted ? "TAKE" : "DEAL")
-                        .font(.cherryBombOne(.regular, size: 20))
-                        .foregroundStyle(.white)
-                        .shadow(color: .fontShadow, radius: 4, x: 0, y: 4)
-                        .padding(.top, 6)
-                }
         }
     }
     
-    private func takeButtonPressed() {
-        
+    private var gameDescription: some View {
+        Group {
+            switch betModel.multiplyNumber == 0 {
+            case true:
+                Text("place a bet and press deal".uppercased())
+            case false:
+                Text("your current winnings: ") + Text(betModel.currentWinning, format: .number)
+            }
+        }
+            .textOnBoardStyle
     }
     
-    private func dealButtonPressed() {
-        
+    private var dealButton: some View {
+        BetActionButton(actionText: "DEAL") {
+            betModel.dealButtonPressed()
+        }
     }
-
+    
+    private var takeButton: some View {
+        BetActionButton(actionText: "TAKE") {
+            betModel.takeButtonPressed()
+        }
+    }
+    
 }
 
 #Preview {
     BetBoard()
+        .environmentObject(BetModel())
 }
