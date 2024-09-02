@@ -8,24 +8,44 @@
 import SwiftUI
 
 struct SpinItems: View {
-    @State private var isSpinning = false
-    @State private var selectedItem: Int?
-    @State private var items: [ImageResource] = [.SunnyDay.bomb, .SunnyDay.brilliant, .SunnyDay.orange, .SunnyDay.emerald, .SunnyDay.love]
-    let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
-
+    @Binding var stepSpin: SunnyDaysCases
+    @EnvironmentObject private var betModel: BetModel
+    var action: () -> Void
+    @State private var items: [ImageResource] = []
+    
     var body: some View {
-        ScrollView(.vertical, showsIndicators: false) {
-            LazyVStack(spacing: 0) {
-                ForEach(0..<100, id: \.self) { _ in
-                    ForEach(0..<5, id: \.self) { index in
-                        Image(items[index])
-                    }
-                }
+        VStack(spacing: 0) {
+            ForEach(Array(items.enumerated()), id: \.offset) { index, item in
+                Image(item)
             }
         }
+        .onTapGesture {
+            withAnimation {
+                items = randomArray
+            }
+            if items.contains(stepSpin.item) {
+                betModel.raiseCoefficient(coefficient: stepSpin.coefficient)
+                stepSpin = stepSpin.next
+            } else {
+                betModel.raiseCoefficient(coefficient: 0)
+                stepSpin = .first
+            }
+            action()
+        }
+        .onAppear {
+            items = randomArray
+        }
+    }
+    
+    private var randomArray: [ImageResource] {
+        let items: [ImageResource] = [.SunnyDay.bomb, .SunnyDay.brilliant, .SunnyDay.orange, .SunnyDay.emerald, .SunnyDay.love]
+        
+        return [items.randomElement()!, items.randomElement()!, items.randomElement()!]
     }
 }
 
 #Preview {
-    SpinItems()
+    SpinItems(stepSpin: .constant(.first)) {
+        
+    }
 }
