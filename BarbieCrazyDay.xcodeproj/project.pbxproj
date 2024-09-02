@@ -25,6 +25,7 @@
 		5C07810D2C7F2D5E002C7F54 /* 🪙Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C07810C2C7F2D5E002C7F54 /* 🪙Wallet.swift */; };
 		5C0781102C7F2F8F002C7F54 /* Story.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C07810F2C7F2F8F002C7F54 /* Story.swift */; };
 		5C0781122C7F4E56002C7F54 /* StoryResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0781112C7F4E56002C7F54 /* StoryResult.swift */; };
+		5C08165C2C85FE6C0080B4FD /* 🚴🏼SpinItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C08165B2C85FE6C0080B4FD /* 🚴🏼SpinItems.swift */; };
 		5C162D512C85C85600EDB05B /* RowButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C162D502C85C85600EDB05B /* RowButtons.swift */; };
 		5C162D532C85E68E00EDB05B /* StoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C162D522C85E68E00EDB05B /* StoryModel.swift */; };
 		5C45B1CB2C78C75C00628C16 /* BarbieCrazyDayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C45B1CA2C78C75C00628C16 /* BarbieCrazyDayApp.swift */; };
@@ -66,6 +67,7 @@
 		5C07810C2C7F2D5E002C7F54 /* 🪙Wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "🪙Wallet.swift"; sourceTree = "<group>"; };
 		5C07810F2C7F2F8F002C7F54 /* Story.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Story.swift; sourceTree = "<group>"; };
 		5C0781112C7F4E56002C7F54 /* StoryResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryResult.swift; sourceTree = "<group>"; };
+		5C08165B2C85FE6C0080B4FD /* 🚴🏼SpinItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "🚴🏼SpinItems.swift"; sourceTree = "<group>"; };
 		5C162D502C85C85600EDB05B /* RowButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowButtons.swift; sourceTree = "<group>"; };
 		5C162D522C85E68E00EDB05B /* StoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryModel.swift; sourceTree = "<group>"; };
 		5C45B1C72C78C75C00628C16 /* BarbieCrazyDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BarbieCrazyDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -194,6 +196,7 @@
 			children = (
 				5C842E7E2C78D2C300103584 /* Info.plist */,
 				5C842E792C78CDB300103584 /* 👋🏼Welcome.swift */,
+				5C9F67082C845FF200623D86 /* Models */,
 				5C9E1A702C8056800090B49A /* 🎰Games */,
 				5C0781042C7E2F67002C7F54 /* 💠Menu */,
 				5C9E1A6B2C7FA3A80090B49A /* 🍩Quests */,
@@ -245,14 +248,13 @@
 		5C9E1A702C8056800090B49A /* 🎰Games */ = {
 			isa = PBXGroup;
 			children = (
-				5C9F67082C845FF200623D86 /* Models */,
-				5C9E1A782C80693C0090B49A /* 🤝BetBoard.swift */,
-				5C9E1A712C8056E70090B49A /* ☀️SunnyDay.swift */,
-				5C9F67032C83BDFB00623D86 /* ❓HowToText.swift */,
-				5C9F67052C83C1DE00623D86 /* 🏆Winner.swift */,
+				5CA6ED512C85EA8D009A4AF1 /* ☀️SunnyDay */,
 				5C9F66FC2C81C1C400623D86 /* 🗻SnowMountain */,
 				5C9E1A772C8065F40090B49A /* ⛈️ Thunderstorm */,
+				5C9E1A782C80693C0090B49A /* 🤝BetBoard.swift */,
 				5C9F67012C83ABB500623D86 /* 🎰Games.swift */,
+				5C9F67032C83BDFB00623D86 /* ❓HowToText.swift */,
+				5C9F67052C83C1DE00623D86 /* 🏆Winner.swift */,
 			);
 			path = "🎰Games";
 			sourceTree = "<group>";
@@ -281,6 +283,15 @@
 				5C9F67092C84600500623D86 /* BetModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		5CA6ED512C85EA8D009A4AF1 /* ☀️SunnyDay */ = {
+			isa = PBXGroup;
+			children = (
+				5C9E1A712C8056E70090B49A /* ☀️SunnyDay.swift */,
+				5C08165B2C85FE6C0080B4FD /* 🚴🏼SpinItems.swift */,
+			);
+			path = "☀️SunnyDay";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -375,6 +386,7 @@
 				5C0780E72C790782002C7F54 /* Color.swift in Sources */,
 				5C0780EC2C7B15F3002C7F54 /* DefaultStorage.swift in Sources */,
 				5C0780F42C7DBE6F002C7F54 /* ℹ️Info.swift in Sources */,
+				5C08165C2C85FE6C0080B4FD /* 🚴🏼SpinItems.swift in Sources */,
 				5C9E1A6F2C7FA4010090B49A /* QuestContainer.swift in Sources */,
 				5C0781012C7E2926002C7F54 /* Button.swift in Sources */,
 				5C0781102C7F2F8F002C7F54 /* Story.swift in Sources */,

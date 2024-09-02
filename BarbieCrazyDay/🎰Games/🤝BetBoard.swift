@@ -79,10 +79,10 @@ struct BetBoard: View {
     
     private var gameDescription: some View {
         Group {
-            switch betModel.multiplyNumber == 0 {
-            case true:
-                Text("place a bet and press deal".uppercased())
+            switch betModel.isGameStarted {
             case false:
+                Text("place a bet and press deal".uppercased())
+            case true:
                 Text("your current winnings: ".uppercased()) + Text(betModel.currentWinning, format: .number)
             }
         }

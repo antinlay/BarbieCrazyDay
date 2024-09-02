@@ -81,4 +81,7 @@ struct SunnyDay: View {
 
 #Preview {
     SunnyDay()
+        .environmentObject(Router())
+        .environmentObject(DefaultStorage())
+        .environmentObject(BetModel())
 }

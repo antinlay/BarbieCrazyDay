@@ -70,8 +70,9 @@ struct SnowMountains: View {
                         isWinnerPresented = true
                     }
                 }
-                .disabled(!betModel.isGameStarted && index == rowIndex)
-                .opacity(betModel.isGameStarted && index == rowIndex ? 1 : 0.65)
+                .disabled(!betModel.isGameStarted)
+                .disabled(index < rowIndex)
+                .opacity(index >= rowIndex ? 1 : 0.65)
             }
         }
     }

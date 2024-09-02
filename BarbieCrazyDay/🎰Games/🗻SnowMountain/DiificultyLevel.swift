@@ -44,7 +44,7 @@ enum DifficultyLevelCases: CaseIterable {
     }
     
     var items: Array<ImageResource> {
-        let allItems: [ImageResource] = [.SunnyDay.brilliant, .SunnyDay.emerald, .SunnyDay.love, .SunnyDay.orange, .SunnyDay.rainbow].shuffled()
+        let allItems: [ImageResource] = [.Mountains.brilliant, .Mountains.emerald, .Mountains.love, .Mountains.orange, .Mountains.rainbow].shuffled()
         var items = allItems.prefix(3)
         items.append(.Mountains.bomb)
 

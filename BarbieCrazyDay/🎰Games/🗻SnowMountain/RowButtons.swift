@@ -27,6 +27,7 @@ struct RowButtons: View {
                         withAnimation {
                             rowIndex = 7
                             betModel.raiseCoefficient(coefficient: 0)
+                            betModel.isGameStarted = false
                         }
                     } else {
                         betModel.raiseCoefficient(coefficient: difficult.coefficient[rowIndex])
