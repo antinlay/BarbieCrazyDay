@@ -25,6 +25,7 @@
 		5C07810D2C7F2D5E002C7F54 /* 🪙Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C07810C2C7F2D5E002C7F54 /* 🪙Wallet.swift */; };
 		5C0781102C7F2F8F002C7F54 /* Story.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C07810F2C7F2F8F002C7F54 /* Story.swift */; };
 		5C0781122C7F4E56002C7F54 /* StoryResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0781112C7F4E56002C7F54 /* StoryResult.swift */; };
+		5C162D512C85C85600EDB05B /* RowButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C162D502C85C85600EDB05B /* RowButtons.swift */; };
 		5C45B1CB2C78C75C00628C16 /* BarbieCrazyDayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C45B1CA2C78C75C00628C16 /* BarbieCrazyDayApp.swift */; };
 		5C45B1CD2C78C75C00628C16 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C45B1CC2C78C75C00628C16 /* ContentView.swift */; };
 		5C45B1CF2C78C75D00628C16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C45B1CE2C78C75D00628C16 /* Assets.xcassets */; };
@@ -64,6 +65,7 @@
 		5C07810C2C7F2D5E002C7F54 /* 🪙Wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "🪙Wallet.swift"; sourceTree = "<group>"; };
 		5C07810F2C7F2F8F002C7F54 /* Story.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Story.swift; sourceTree = "<group>"; };
 		5C0781112C7F4E56002C7F54 /* StoryResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryResult.swift; sourceTree = "<group>"; };
+		5C162D502C85C85600EDB05B /* RowButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowButtons.swift; sourceTree = "<group>"; };
 		5C45B1C72C78C75C00628C16 /* BarbieCrazyDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BarbieCrazyDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C45B1CA2C78C75C00628C16 /* BarbieCrazyDayApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarbieCrazyDayApp.swift; sourceTree = "<group>"; };
 		5C45B1CC2C78C75C00628C16 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 			isa = PBXGroup;
 			children = (
 				5C9E1A732C8057100090B49A /* 🗻SnowMountains.swift */,
+				5C162D502C85C85600EDB05B /* RowButtons.swift */,
 				5C9F66FF2C83411200623D86 /* DiificultyLevel.swift */,
 			);
 			path = "🗻SnowMountain";
@@ -362,6 +365,7 @@
 				5C0780F02C7D0E1A002C7F54 /* 🍩Quests.swift in Sources */,
 				5C0780FD2C7DF0A2002C7F54 /* 🎚️Levels.swift in Sources */,
 				5C9E1A762C8057490090B49A /* ⛈️ Thunderstorm.swift in Sources */,
+				5C162D512C85C85600EDB05B /* RowButtons.swift in Sources */,
 				5C0781062C7E2F95002C7F54 /* 🕰️TimeBoard.swift in Sources */,
 				5C9E1A6D2C7FA3CD0090B49A /* QuestCases.swift in Sources */,
 				5C0780E72C790782002C7F54 /* Color.swift in Sources */,

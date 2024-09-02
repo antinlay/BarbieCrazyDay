@@ -7,52 +7,16 @@
 
 import SwiftUI
 
-extension SnowMountains {
-    struct CoefficientButton: View {
-        var item: ImageResource
-        var coefficient: Double
-        var placeholder: ImageResource = .Mountains.actionButton
-        @State var isOpen = false
-        var action: () -> Void
-        
-        var body: some View {
-            Button {
-                isOpen = true
-                action()
-            } label: {
-                ZStack {
-                    Image(item)
-                        .opacity(isOpen ? 1 : 0)
-                    Image(placeholder)
-                        .opacity(isOpen ? 0 : 1)
-                }
-                .scaleEffect(isOpen ? 1.3 : 1)
-            }
-            .disabled(isOpen)
-        }
-    }
-}
-
 struct SnowMountains: View {
-    @State var difficultLevelCases: DifficultyLevelCases = .easy
     @EnvironmentObject private var router: Router
+    @EnvironmentObject private var betModel: BetModel
+    
+    @State private var difficultLevelCases: DifficultyLevelCases = .easy
+    @State private var rowIndex = 7
+    @State private var isWinnerPresented = false
     @State private var isPausePresented = false
     @State private var isHowToPresented = false
     @State private var isDifficultPresented = false
-
-    @State private var multiplyNumber: Double = 0
-    @State private var gameStarted = true
-    
-    private var betMultipluy: some View {
-        Group {
-            Text("x") +
-            Text(multiplyNumber, format: .number)
-        }
-        .font(.cherryBombOne(.regular, size: 25))
-        .foregroundColor(.white)
-        .strokeText(width: 0.5, color: .shadowPinkColor)
-        .shadow(color: .shadowPinkColor, radius: 0.5, x: 0, y: 5)
-    }
     
     private var changeLevel: some View {
         Button {
@@ -76,7 +40,7 @@ struct SnowMountains: View {
                 .alignmentPosition(.top)
                 gameGrid
                     .alignmentPosition(.center)
-                BetBoard()
+                BetBoard { isWinnerPresented = true }
                     .alignmentPosition(.bottom)
             }
         }.modifier(AppBackground(.Mountains.background))
@@ -89,24 +53,30 @@ struct SnowMountains: View {
                 difficultLevel
                     .presentationBackground(.ultraThinMaterial)
             }
+            .fullScreenCover(isPresented: $isWinnerPresented) {
+                Winner(background: .SunnyDay.background, winnerCase: .victory)
+            }
+    }
+    
+    private func checkCoefficient(_ coefficient: Double) -> Int {
+        if let index = difficultLevelCases.coefficient.firstIndex(of: coefficient) {
+            print(index)
+            return index
+        } else  {
+            return 0
+        }
     }
     
     private var gameGrid: some View {
         LazyHGrid(rows: Array(repeating: GridItem(.fixed(60)), count: 8)) {
             ForEach(Array(difficultLevelCases.coefficient.enumerated()), id: \.offset) { index, coefficient in
-                rowCoefficient(coefficient)
-            }
-        }
-    }
-    
-    private func rowCoefficient(_ coefficient: Double) -> some View {
-        LazyHStack(spacing: 0) {
-            ForEach(difficultLevelCases.items, id: \.self) { item in
-                CoefficientButton(item: item, coefficient: coefficient) {
-                    multiplyNumber += item == .SunnyDay.bomb ? 0 : coefficient
+                RowButtons(rowIndex: $rowIndex, difficult: difficultLevelCases) {
+                    if rowIndex != 0 {
+                        rowIndex -= 1
+                    }
                 }
-                .opacity(gameStarted ? 1 : 0.5)
-                .disabled(!gameStarted)
+                .disabled(!betModel.isGameStarted && index == rowIndex)
+                .opacity(betModel.isGameStarted && index == rowIndex ? 1 : 0.65)
             }
         }
     }
@@ -133,4 +103,5 @@ struct SnowMountains: View {
 
 #Preview {
     SnowMountains()
+        .environmentObject(BetModel())
 }

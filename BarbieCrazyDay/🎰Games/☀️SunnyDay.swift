@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SunnyDay: View {
+    @State private var isWinnerPresented = false
     @State private var isPausePresented = false
     @State private var isHowToPresented = false
     @State private var multiplyNumber: Double = 0
@@ -64,7 +65,7 @@ struct SunnyDay: View {
                         .padding(.bottom, 10)
                     }
             }
-            BetBoard()
+            BetBoard { isWinnerPresented = true }
                 .alignmentPosition(.bottom)
         }.modifier(AppBackground(.SunnyDay.background))
             .pauseSheet(isPresented: $isPausePresented) {
@@ -72,6 +73,9 @@ struct SunnyDay: View {
                 isHowToPresented = true
             }
             .howToSheet(isPresented: $isHowToPresented, title: SunnyDay.howToTitle, text: SunnyDay.howToText)
+            .fullScreenCover(isPresented: $isWinnerPresented) {
+                Winner(background: .SunnyDay.background, winnerCase: .victory)
+            }
     }
 }
 

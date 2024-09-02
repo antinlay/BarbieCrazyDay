@@ -7,17 +7,16 @@
 
 import SwiftUI
 
-//final class ThunderstormModel: ObservableObject {
-//    @Published
-//}
-
 struct Thunderstorm: View {
     @EnvironmentObject private var router: Router
     @EnvironmentObject private var betModel: BetModel
+    
+    @State private var isWinnerPresented = false
     @State private var isPausePresented = false
     @State private var isHowToPresented = false
+    
     @State private var randomNumber = Double.random(in: 3...100)
-    let timer = Timer.publish(every: 0.2, on: .main, in: .common).autoconnect()
+    let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
     
     private var betMultipluy: some View {
         Group {
@@ -45,7 +44,7 @@ struct Thunderstorm: View {
             }
             .alignmentPosition(.top)
 
-            BetBoard()
+            BetBoard { isWinnerPresented = true }
                 .alignmentPosition(.bottom)
         }
         .modifier(AppBackground(.Thunderstorm.background))
@@ -54,6 +53,9 @@ struct Thunderstorm: View {
             isHowToPresented = true
         }
         .howToSheet(isPresented: $isHowToPresented, title: Thunderstorm.howToTitle, text: Thunderstorm.howToText)
+        .fullScreenCover(isPresented: $isWinnerPresented) {
+            Winner(background: .SunnyDay.background, winnerCase: .victory)
+        }
         .onReceive(timer) { _ in
             if betModel.isGameStarted && betModel.multiplyNumber < randomNumber {
                 betModel.multiplyNumber += 0.1

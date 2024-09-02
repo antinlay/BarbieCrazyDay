@@ -10,7 +10,7 @@ import SwiftUI
 enum WinnerCase {
     case winner, victory
     
-    var value: ImageResource {
+    var random: ImageResource {
         switch self {
         case .winner:
                 .Thunderstorm.winner
@@ -22,8 +22,8 @@ enum WinnerCase {
 
 struct Winner: View {
     @EnvironmentObject private var router: Router
-    var background: ImageResource = .SunnyDay.background
-    var winnerCase: WinnerCase = .victory
+    var background: ImageResource
+    var winnerCase: WinnerCase
     
     var body: some View {
         ZStack {
@@ -34,7 +34,7 @@ struct Winner: View {
                 .fill(Color.white.opacity(0.65))
                 .blur(radius: 122)
             VStack(spacing: 50) {
-                Image(winnerCase.value)
+                Image(winnerCase.random)
                 Wallet()
             }
             LongHomeButon { router.navigate(to: .menu) }
@@ -48,5 +48,5 @@ struct Winner: View {
 }
 
 #Preview {
-    Winner()
+    Winner(background: .SunnyDay.background, winnerCase: .victory)
 }

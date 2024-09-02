@@ -10,6 +10,7 @@ import SwiftUI
 struct BetBoard: View {
     @EnvironmentObject private var betModel: BetModel
     @State var actionButtonDisabled = true
+    var winner: () -> Void
     
     private var betInfo: some View {
         VStack(spacing: 8) {
@@ -97,12 +98,15 @@ struct BetBoard: View {
     private var takeButton: some View {
         BetActionButton(actionText: "TAKE") {
             betModel.takeButtonPressed()
+            winner()
         }
     }
     
 }
 
 #Preview {
-    BetBoard()
+    BetBoard(winner: {
+        //
+    })
         .environmentObject(BetModel())
 }

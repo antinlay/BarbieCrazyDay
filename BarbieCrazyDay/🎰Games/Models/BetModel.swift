@@ -28,5 +28,11 @@ final class BetModel: ObservableObject {
         isGameStarted = true
     }
     
-    
+    func raiseCoefficient(coefficient: Double) {
+        if coefficient == 0 {
+            isGameStarted = false
+        } else {
+            multiplyNumber = coefficient
+        }
+    }
 }
