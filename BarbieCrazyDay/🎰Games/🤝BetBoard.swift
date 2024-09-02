@@ -87,6 +87,7 @@ struct BetBoard: View {
             }
         }
             .textOnBoardStyle
+            .shadow(color: .black, radius: 4, x: 0, y: 4)
     }
     
     private var dealButton: some View {

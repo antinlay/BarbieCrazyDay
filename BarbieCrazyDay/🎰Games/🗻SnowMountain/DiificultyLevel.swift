@@ -46,13 +46,13 @@ enum DifficultyLevelCases: CaseIterable {
     var items: Array<ImageResource> {
         let allItems: [ImageResource] = [.SunnyDay.brilliant, .SunnyDay.emerald, .SunnyDay.love, .SunnyDay.orange, .SunnyDay.rainbow].shuffled()
         var items = allItems.prefix(3)
-        items.append(.SunnyDay.bomb)
+        items.append(.Mountains.bomb)
 
         switch self {
         case .easy:
             return items.shuffled()
         case .hard:
-            return [allItems.randomElement()!, .SunnyDay.bomb].shuffled()
+            return [allItems.randomElement()!, .Mountains.bomb].shuffled()
         case .crazy:
             return items.shuffled()
         }

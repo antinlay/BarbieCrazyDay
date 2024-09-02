@@ -16,7 +16,6 @@ struct StoryResult: View {
     @ViewBuilder private var goodJob: some View {
         Image(storyModel.gift)
             .padding(.trailing, -40)
-            .rotationEffect(.degrees(-30))
             .alignmentPosition(.topTrailing)
         VStack(alignment: .trailing) {
             Text(selectedOption.value)

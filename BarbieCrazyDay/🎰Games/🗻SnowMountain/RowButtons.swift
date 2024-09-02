@@ -18,25 +18,16 @@ struct RowButtons: View {
     
     var action: () -> Void
     
-    private var betMultiply: some View {
-        Group {
-            Text("x") +
-            Text(difficult.coefficient[rowIndex], format: .number)
-        }
-        .font(.cherryBombOne(.regular, size: 25))
-        .foregroundColor(.white)
-        .strokeText(width: 0.5, color: .shadowPinkColor)
-        .shadow(color: .shadowPinkColor, radius: 0.5, x: 0, y: 5)
-    }
-    
     var body: some View {
         LazyHStack(spacing: 0) {
             ForEach(items, id: \.self) { item in
                 Button {
                     isOpen = true
-                    if item == .SunnyDay.bomb {
-                        rowIndex = 7
-                        betModel.raiseCoefficient(coefficient: 0)
+                    if item == .Mountains.bomb {
+                        withAnimation {
+                            rowIndex = 7
+                            betModel.raiseCoefficient(coefficient: 0)
+                        }
                     } else {
                         betModel.raiseCoefficient(coefficient: difficult.coefficient[rowIndex])
                         action()
@@ -45,7 +36,6 @@ struct RowButtons: View {
                     ZStack {
                         Group{
                             Image(item)
-                            betMultiply
                         }
                         .opacity(isOpen ? 1 : 0)
                         Image(placeholder)
@@ -57,11 +47,11 @@ struct RowButtons: View {
             }
         }
         .onChange(of: betModel.isGameStarted) { newValue in
-            items = difficult.items
-            withAnimation {
-                if !newValue {
-                    isOpen = false
-                }
+            withAnimation(.bouncy) {
+                items = difficult.items
+            }
+            if !newValue {
+                isOpen = false
             }
         }
     }

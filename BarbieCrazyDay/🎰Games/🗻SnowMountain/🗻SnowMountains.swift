@@ -16,7 +16,7 @@ struct SnowMountains: View {
     @State private var isWinnerPresented = false
     @State private var isPausePresented = false
     @State private var isHowToPresented = false
-    @State private var isDifficultPresented = false
+    @State private var isDifficultPresented = true
     
     private var changeLevel: some View {
         Button {
@@ -24,11 +24,12 @@ struct SnowMountains: View {
         } label: {
             Image(difficultLevelCases.info)
         }
+        .disabled(betModel.isGameStarted)
     }
     
     var body: some View {
         ZStack {
-            VStack {
+            Group {
                 HStack(spacing: 0) {
                     PauseButton { isPausePresented = true }
                         .padding(.leading)
@@ -37,12 +38,12 @@ struct SnowMountains: View {
                     Wallet()
                         .padding(.trailing)
                 }
-                .alignmentPosition(.top)
                 gameGrid
-                    .alignmentPosition(.center)
-                BetBoard { isWinnerPresented = true }
-                    .alignmentPosition(.bottom)
+                    .padding(.top, -65)
             }
+                .alignmentPosition(.top)
+            BetBoard { isWinnerPresented = true }
+                .alignmentPosition(.bottom)
         }.modifier(AppBackground(.Mountains.background))
             .pauseSheet(isPresented: $isPausePresented) {
                 isPausePresented = false
@@ -58,21 +59,15 @@ struct SnowMountains: View {
             }
     }
     
-    private func checkCoefficient(_ coefficient: Double) -> Int {
-        if let index = difficultLevelCases.coefficient.firstIndex(of: coefficient) {
-            print(index)
-            return index
-        } else  {
-            return 0
-        }
-    }
-    
     private var gameGrid: some View {
         LazyHGrid(rows: Array(repeating: GridItem(.fixed(60)), count: 8)) {
             ForEach(Array(difficultLevelCases.coefficient.enumerated()), id: \.offset) { index, coefficient in
                 RowButtons(rowIndex: $rowIndex, difficult: difficultLevelCases) {
                     if rowIndex != 0 {
                         rowIndex -= 1
+                    } else {
+                        betModel.takeButtonPressed()
+                        isWinnerPresented = true
                     }
                 }
                 .disabled(!betModel.isGameStarted && index == rowIndex)
@@ -98,7 +93,6 @@ struct SnowMountains: View {
             }
         }
     }
-    
 }
 
 #Preview {
