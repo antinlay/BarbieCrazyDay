@@ -41,7 +41,7 @@ struct SnowMountains: View {
                 gameGrid
                     .padding(.top, -65)
             }
-                .alignmentPosition(.top)
+            .alignmentPosition(.top)
             BetBoard { isWinnerPresented = true }
                 .alignmentPosition(.bottom)
         }.modifier(AppBackground(.Mountains.background))
@@ -86,8 +86,8 @@ struct SnowMountains: View {
                 .shadow(color: .black, radius: 4, x: 0, y: 4)
             ForEach(DifficultyLevelCases.allCases, id: \.self) { difficult in
                 Button {
-                    difficultLevelCases = difficult
                     isDifficultPresented = false
+                    difficultLevelCases = difficult
                 } label: {
                     Image(difficult.button)
                 }

@@ -7,70 +7,13 @@
 
 import SwiftUI
 
-enum SunnyDaysCases: CaseIterable {
-    case first, second, third, fourth, fifth
-    
-    var score: ImageResource {
-        switch self {
-        case .first:
-                .SunnyDay.bombScore
-        case .second:
-                .SunnyDay.brilliantScore
-        case .third:
-                .SunnyDay.orangeScore
-        case .fourth:
-                .SunnyDay.emeraldScore
-        case .fifth:
-                .SunnyDay.loveScore
-        }
-    }
-    
-    var item: ImageResource {
-        switch self {
-        case .first:
-                .SunnyDay.bomb
-        case .second:
-                .SunnyDay.brilliant
-        case .third:
-                .SunnyDay.orange
-        case .fourth:
-                .SunnyDay.emerald
-        case .fifth:
-                .SunnyDay.love
-        }
-    }
-    
-    var coefficient: Double {
-        switch self {
-        case .first:
-            0.25
-        case .second:
-            0.5
-        case .third:
-            1
-        case .fourth:
-            2
-        case .fifth:
-            5
-        }
-    }
-    
-    var next: SunnyDaysCases {
-        if let index = SunnyDaysCases.allCases.firstIndex(of: self), index < SunnyDaysCases.allCases.count - 1 {
-            return SunnyDaysCases.allCases[index + 1]
-        }
-        return self
-    }
-
-}
-
 struct SunnyDay: View {
     @EnvironmentObject private var betModel: BetModel
     
     @State private var isWinnerPresented = false
     @State private var isPausePresented = false
     @State private var isHowToPresented = false
-    @State private var stepSpin: SunnyDaysCases = .first
+    @State private var stepSpin: SunnyDayCases = .first
     
     private var betMultipluy: some View {
         Group {
@@ -101,13 +44,28 @@ struct SunnyDay: View {
             .cornerRadius(13)
     }
     
+    private func stepScore(_ step: SunnyDayCases) -> some View {
+        Image(step.score)
+            .overlay(alignment: .bottom) {
+                Text(step.coefficient, format: .number)
+                    .font(.dynamo(.regular, size: 14))
+                    .foregroundStyle(.white)
+                    .padding(.bottom, 3)
+            }
+    }
+    
+    private func spinNumber(_ index: Int) -> some View {
+        Text(index + 1, format: .number)
+            .font(.cherryBombOne(.regular, size: 20))
+            .foregroundStyle(.white)
+            .shadow(color: .fontShadow, radius: 4, x: 0, y: 4)
+    }
+    
     var body: some View {
         ZStack {
             HStack {
                 Group {
                     PauseButton { isPausePresented = true }
-//                    Text("potential winning amount: ".uppercased()) +
-//                    Text(multiplyNumber, format: .number)
                 }
                 .textOnBoardStyle
                 .padding(.leading)
@@ -122,15 +80,9 @@ struct SunnyDay: View {
             Image(.SunnyDay.casinoBoard)
                 .overlay(alignment: .bottom) {
                     HStack(spacing: -50) {
-                        ForEach(Array(SunnyDaysCases.allCases.enumerated()), id: \.offset) { index, step in
+                        ForEach(Array(SunnyDayCases.allCases.enumerated()), id: \.offset) { index, step in
                             ZStack {
-                                Image(step.score)
-                                    .overlay(alignment: .bottom) {
-                                        Text(step.coefficient, format: .number)
-                                            .font(.dynamo(.regular, size: 14))
-                                            .foregroundStyle(.white)
-                                            .padding(.bottom, 3)
-                                    }
+                                stepScore(step)
                                     .padding(.top, -63)
                                     .alignmentPosition(.top)
                                 nextStep
@@ -139,10 +91,10 @@ struct SunnyDay: View {
                                     .opacity(betModel.isGameStarted ? 1 : 0)
                                 VStack(spacing: 0) {
                                     SpinItems(stepSpin: $stepSpin) { }
-                                    Text(index + 1, format: .number)
-                                        .font(.cherryBombOne(.regular, size: 20))
-                                        .foregroundStyle(.white)
-                                        .shadow(color: .fontShadow, radius: 4, x: 0, y: 4)
+                                        .disabled(step != stepSpin)
+                                        .opacity(step == stepSpin ? 1 : 0.65)
+                                        .disabled(!betModel.isGameStarted)
+                                    spinNumber(index)
                                         .padding(.bottom, -15)
                                 }
                             }

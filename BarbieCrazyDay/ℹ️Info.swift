@@ -9,7 +9,7 @@ import SwiftUI
 
 struct Info: View {
     @EnvironmentObject private var router: Router
-
+    
     var body: some View {
         ZStack {
             VStack {
@@ -17,28 +17,25 @@ struct Info: View {
                     HomeButon(action: {
                         router.navigate(to: GameViews.menu)
                     })
-                        .padding(.leading)
+                    .padding(.leading)
                     Spacer()
                     Wallet()
                         .padding(.trailing)
                 }
-//                Image(.Info.textBoard)
-//                    .overlay {
-                        ScrollView(showsIndicators: false) {
-                            VStack {
-                                Text("\nAbout the App")
-                                    .font(.dynamo(.regular, size: 25))
-                                Text(aboutText + questsText + mountainsText + sunnyDayText + thunderstormText)
-                                    .font(.dynamo(.regular, size: 13))
-                            }
-                            .foregroundStyle(.white)
-                        }
-                        .boardBackground
-                        .padding(.vertical, 6)
-                        .padding(.horizontal, 24)
-//                    }
-                    .alignmentPosition(.bottom)
-                    .padding(.bottom)
+                ScrollView(showsIndicators: false) {
+                    VStack {
+                        Text("\nAbout the App")
+                            .font(.dynamo(.regular, size: 25))
+                        Text(aboutText + questsText + mountainsText + sunnyDayText + thunderstormText)
+                            .font(.dynamo(.regular, size: 13))
+                    }
+                    .foregroundStyle(.white)
+                }
+                .boardBackground
+                .padding(.vertical, 6)
+                .padding(.horizontal, 24)
+                .alignmentPosition(.bottom)
+                .padding(.bottom)
             }
         }.modifier(AppBackground(.Shop.background))
     }

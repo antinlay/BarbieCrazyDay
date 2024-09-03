@@ -16,7 +16,8 @@ struct Thunderstorm: View {
     @State private var isHowToPresented = false
     
     @State private var randomNumber = Double.random(in: 3...100)
-    let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
+    @State private var timer: Timer?
+//    let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
     
     private var betMultipluy: some View {
         Group {
@@ -56,14 +57,31 @@ struct Thunderstorm: View {
         .fullScreenCover(isPresented: $isWinnerPresented) {
             Winner(background: .SunnyDay.background, winnerCase: .victory)
         }
-        .onReceive(timer) { _ in
-            if betModel.isGameStarted && betModel.multiplyNumber < randomNumber {
-                betModel.multiplyNumber += 0.1
-            } else {
-                betModel.multiplyNumber = 0
+        .onChange(of: betModel.isGameStarted) {newValue in
+            if newValue {
+                withAnimation {
+                    startTimer()
+                }
             }
         }
     }
+    
+    private func startTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
+            if betModel.isGameStarted && betModel.multiplyNumber < randomNumber {
+                betModel.multiplyNumber += 0.1
+            } else {
+                stopTimer()
+                betModel.raiseCoefficient(coefficient: 0)
+            }
+        }
+    }
+
+    private func stopTimer() {
+        timer?.invalidate()
+        timer = nil
+    }
+
 }
 
 #Preview {

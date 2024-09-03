@@ -73,7 +73,7 @@ struct StoryResult: View {
     private func levelUp() {
         defaultStorage.wallet += defaultStorage.level <= Int(storyModel.reward/1000) ? storyModel.reward : 0
         defaultStorage.level = max(Int(storyModel.reward/1000) + 1, defaultStorage.level)
-        defaultStorage.completedQuests = max(Int(storyModel.reward/1000) + 1, defaultStorage.completedQuests)
+        defaultStorage.completedQuests = max(Int(storyModel.reward/1000), defaultStorage.completedQuests)
     }
     
     private var niceTry: some View {

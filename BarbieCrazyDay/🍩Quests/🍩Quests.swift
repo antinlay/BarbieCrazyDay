@@ -14,28 +14,20 @@ struct Quests: View {
     let giftArray = Array(Gift.allCases.enumerated())
     
     private func questStatus(_ index: Int) -> QuestStatus {
-        if index <= questsComlete {
-            return .done
-        } else if index == questsComlete + 1 {
-            return .now
+        if index < questsComlete {
+            .done
+        } else if index == questsComlete {
+            .now
         } else {
-            return .next
+            .next
         }
     }
-        
+    
     var body: some View {
         NavigationStack {
-            ScrollView {
                 ZStack {
+                    ScrollView {
                     VStack {
-                        HStack {
-                            HomeButon { router.navigate(to: GameViews.menu) }
-                                .padding(.leading)
-                            Spacer()
-                            Wallet()
-                                .padding(.trailing)
-                        }
-                        
                         LazyVGrid(columns: [GridItem(.fixed(160)), GridItem(.fixed(160))], spacing: 0) {
                             ForEach(giftArray, id: \.offset) { index, gift in
                                 NavigationLink {
@@ -47,7 +39,15 @@ struct Quests: View {
                             }
                         }
                     }
+                    .padding(.top, 70)
                 }
+                    HStack {
+                        HomeButon { router.navigate(to: GameViews.menu) }
+                            .padding(.leading)
+                        Spacer()
+                        Wallet()
+                            .padding(.trailing)
+                    }.alignmentPosition(.top)
             }.modifier(AppBackground(.Quests.background))
         }
         .navigationBarBackButtonHidden()

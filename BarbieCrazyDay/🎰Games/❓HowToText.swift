@@ -40,9 +40,9 @@ extension Thunderstorm {
                         As the ship glides across the screen, your potential winnings multiply. It's up to you, the player, to decide when to 'save' the ship li.e., claim your winnings) before it disappears from view, escaping the lightning yourself.
                         The essence of the game lies in the choice of risk and reward. The longer you wait, the higher the potential winnings, but so does the risk of losing it all.
                         How to play:
-                        1. Place your bet and click the "Deal" button.
-                        2. Decide at what point you want to collect your winnings while the ship is in your sights. To collect your winnings, click the "Take" button.
-                        3. Don't forget to complete tasks to increase your level to unlock new quests in the 'Quests' section!
+                            1. Place your bet and click the "Deal" button.
+                            2. Decide at what point you want to collect your winnings while the ship is in your sights. To collect your winnings, click the "Take" button.
+                            3. Don't forget to complete tasks to increase your level to unlock new quests in the 'Quests' section!
                         """
 }
 
@@ -51,10 +51,10 @@ extension SnowMountains {
     static var howToText = """
                         Navigate icy slopes to collect snowballs with multiplayer and avoid bombs. The game's difficulty increases from 'Easy' to 'Crazy' as you advance.
                         How to play:
-                        1. Select difficulty level before playing.
-                        2. Place your bet and click the "Deal" button.
-                        3. Start your selection from the bottom row and work your way up.
-                        4. If you successfully choose a snowball, you will see the total winning multiplier on the tile. If you choose unsuccessfully and encounter a bomb, the game will end, and your winnings will be lost.
-                        5. Don't forget to complete tasks to increase your level to unlock new quests in the 'Quests' section!
+                            1. Select difficulty level before playing.
+                            2. Place your bet and click the "Deal" button.
+                            3. Start your selection from the bottom row and work your way up.
+                            4. If you successfully choose a snowball, you will see the total winning multiplier on the tile. If you choose unsuccessfully and encounter a bomb, the game will end, and your winnings will be lost.
+                            5. Don't forget to complete tasks to increase your level to unlock new quests in the 'Quests' section!
                         """
 }

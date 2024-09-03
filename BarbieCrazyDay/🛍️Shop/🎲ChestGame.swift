@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct ChestGame: View {
-    @EnvironmentObject private var defaultStorage: DefaultStorage
+    @AppStorage(DefaultStorage.Key.wallet.rawValue) private var wallet = 10_000
     @Binding var start: Bool
     @State private var isRewardShowing = false
-    private var chests: Set<ImageResource> = [.Shop.chest1, .Shop.chest2, .Shop.chest3, .Shop.chest4, .Shop.chest5, .Shop.chest6]
+    @State private var chests: [ImageResource] = [.Shop.chest1, .Shop.chest2, .Shop.chest3]
+    @State private var rewardRandom: [Int] = Array(repeating: 0, count: 3)
     
-    @ViewBuilder private func rewardButton(_ chest: ImageResource) -> some View {
-        let random = Int.random(in: 100...5000)
-        
+    private func rewardButton(_ chest: ImageResource, rewardRandom: Int) -> some View {
         Button {
+            print(chest, rewardRandom)
             withAnimation {
-                defaultStorage.wallet += random
+                wallet += rewardRandom
                 isRewardShowing = true
                 start = false
             }
@@ -28,7 +28,7 @@ struct ChestGame: View {
                 .overlay {
                     Group {
                         Image(.Shop.almaz)
-                        Text(random, format: .number)
+                        Text(rewardRandom, format: .number)
                             .font(.cherryBombOne(.regular, size: 18))
                             .foregroundStyle(.white)
                     }
@@ -42,11 +42,17 @@ struct ChestGame: View {
     }
     
     var body: some View {
-        LazyHStack {
-            ForEach(Array(chests.enumerated()).prefix(3), id: \.offset) { index, chest in
-                rewardButton(chest)
+        HStack {
+            ForEach(Array(chests.shuffled().enumerated()).prefix(3), id: \.offset) { index, chest in
+                rewardButton(chest, rewardRandom: rewardRandom[index])
                     .disabled(!start)
                     .padding(.bottom, index == 1 ? 30 : 0)
+            }
+        }
+        .onChange(of: start) { newValue in
+            if newValue {
+                chests = [.Shop.chest1, .Shop.chest2, .Shop.chest3, .Shop.chest4, .Shop.chest5, .Shop.chest6]
+                rewardRandom = [Int.random(in: 100...5000), Int.random(in: 100...5000), Int.random(in: 100...5000)]
             }
         }
     }
