@@ -10,23 +10,13 @@ import SwiftUI
 struct GameMenu: View {
     @EnvironmentObject private var router: Router
     @EnvironmentObject private var defaultStorage: DefaultStorage
-                
+    
     var body: some View {
         ZStack {
+            fullScreenBackground(.Welcome.background)
             barbie
             levelBoard
-            VStack(alignment: .trailing) {
-                HStack {
-                    InfoButton(action: { router.navigate(to: GameViews.info) })
-                        .padding(.leading)
-                    Spacer()
-                    Wallet()
-                        .padding(.trailing)
-                }
-                TimeBoard()
-                    .padding(.trailing)
-            }
-            .modifier(AlignmentPosition(.topLeading))
+            
             HStack(alignment: .bottom) {
                 Button {
                     router.navigate(to: GameViews.quests)
@@ -55,7 +45,21 @@ struct GameMenu: View {
             }
             .padding(.horizontal, 24)
             .padding(.bottom, -100)
-        }.modifier(AppBackground(.Menu.background))
+            
+            VStack(alignment: .trailing) {
+                HStack {
+                    InfoButton { router.navigate(to: GameViews.info) }
+                        .padding(.leading)
+                    Spacer()
+                    Wallet()
+                        .padding(.trailing)
+                }
+                TimeBoard()
+                    .padding(.trailing)
+            }
+            .alignmentPosition(.top).padding(.top)
+            
+        }
     }
     
     private var levelBoard: some View {
@@ -63,11 +67,10 @@ struct GameMenu: View {
             .alignmentPosition(.bottomLeading)
             .padding(.leading)
     }
-        
+    
     private var barbie: some View {
         Image(.Menu.barbie)
-            .scaleEffect(1.04)
-            .modifier(AlignmentPosition(.bottomLeading))
+            .alignmentPosition(.bottomLeading).ignoresSafeArea()
     }
 }
 

@@ -61,6 +61,7 @@ struct Welcome: View {
     
     var body: some View {
         ZStack {
+            fullScreenBackground(.Welcome.background)
             Image(.Welcome.barbie)
                 .modifier(AlignmentPosition(.bottomLeading)).ignoresSafeArea()
             cloudHi
@@ -70,7 +71,7 @@ struct Welcome: View {
                 startButton
             }.modifier(AlignmentPosition(.bottom))
                 .padding(.bottom, 24)
-        }.modifier(AppBackground(.Welcome.background))
+        }
     }
     
     private var stepDescription: some View {

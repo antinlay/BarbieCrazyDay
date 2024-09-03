@@ -26,6 +26,7 @@ struct Quests: View {
     var body: some View {
         NavigationStack {
                 ZStack {
+                    fullScreenBackground(.Quests.background)
                     ScrollView {
                     VStack {
                         LazyVGrid(columns: [GridItem(.fixed(160)), GridItem(.fixed(160))], spacing: 0) {
@@ -48,7 +49,7 @@ struct Quests: View {
                         Wallet()
                             .padding(.trailing)
                     }.alignmentPosition(.top)
-            }.modifier(AppBackground(.Quests.background))
+            }
         }
         .navigationBarBackButtonHidden()
     }

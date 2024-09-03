@@ -63,6 +63,7 @@ struct SunnyDay: View {
     
     var body: some View {
         ZStack {
+            fullScreenBackground(.SunnyDay.background)
             HStack {
                 Group {
                     PauseButton { isPausePresented = true }
@@ -104,7 +105,7 @@ struct SunnyDay: View {
                 }
             BetBoard { isWinnerPresented = true }
                 .alignmentPosition(.bottom)
-        }.modifier(AppBackground(.SunnyDay.background))
+        }
             .pauseSheet(isPresented: $isPausePresented) {
                 isPausePresented = false
                 isHowToPresented = true

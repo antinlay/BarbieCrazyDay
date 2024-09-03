@@ -72,6 +72,7 @@ struct Shop: View {
     
     var body: some View {
         ZStack {
+            fullScreenBackground(.Shop.background)
             header
                 .alignmentPosition(.top)
             VStack(spacing: 4) {
@@ -83,7 +84,7 @@ struct Shop: View {
             }
             .alignmentPosition(.bottom)
             .padding(.bottom, 40)
-        }.modifier(AppBackground(.Shop.background))
+        }
     }
 }
 

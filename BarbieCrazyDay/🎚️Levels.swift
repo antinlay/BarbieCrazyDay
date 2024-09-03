@@ -94,6 +94,7 @@ struct Levels: View {
     
     var body: some View {
         ZStack {
+            fullScreenBackground(.Shop.background)
             ScrollView(showsIndicators: false) {
                 ForEach(1...10, id: \.self) { level in
                     LevelBoard(level: level)
@@ -108,7 +109,7 @@ struct Levels: View {
                 Wallet()
                     .padding(.trailing)
             }.alignmentPosition(.top)
-        }.modifier(AppBackground(.Shop.background))
+        }
     }
 }
 

@@ -12,6 +12,7 @@ struct Info: View {
     
     var body: some View {
         ZStack {
+            fullScreenBackground(.Shop.background)
             VStack {
                 HStack {
                     HomeButon(action: {
@@ -37,7 +38,7 @@ struct Info: View {
                 .alignmentPosition(.bottom)
                 .padding(.bottom)
             }
-        }.modifier(AppBackground(.Shop.background))
+        }
     }
     
     private var aboutText = """

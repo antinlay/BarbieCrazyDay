@@ -44,6 +44,7 @@ struct Story: View {
     
     var body: some View {
         ZStack {
+            fullScreenBackground(storyModel.background)
             switch isShowingOptions {
             case true:
                 gameStory
@@ -79,7 +80,6 @@ struct Story: View {
                 .padding(.leading)
             
         }
-        .modifier(AppBackground(storyModel.background))
         .fullScreenCover(isPresented: $isPausePresented) {
                 pauseSheet
                     .presentationBackground(.ultraThinMaterial)

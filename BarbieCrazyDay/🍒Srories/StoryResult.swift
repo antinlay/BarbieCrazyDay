@@ -54,6 +54,7 @@ struct StoryResult: View {
         let isRightOption = selectedOption.key.hasPrefix(storyModel.trueOption)
         
         ZStack {
+            fullScreenBackground(storyModel.background)
             switch isRightOption {
             case true:
                 goodJob
@@ -66,7 +67,6 @@ struct StoryResult: View {
                 .alignmentPosition(.bottomTrailing)
                 .padding(.trailing)
         }
-        .modifier(AppBackground(storyModel.background))
         .navigationBarBackButtonHidden()
     }
     

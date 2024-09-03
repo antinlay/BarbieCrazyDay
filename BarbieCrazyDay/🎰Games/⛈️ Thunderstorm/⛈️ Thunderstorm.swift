@@ -32,6 +32,7 @@ struct Thunderstorm: View {
     
     var body: some View {
         ZStack {
+            fullScreenBackground(.Thunderstorm.background)
             betMultipluy
                 .alignmentPosition(.top)
                 .padding(.top, 45)
@@ -48,7 +49,6 @@ struct Thunderstorm: View {
             BetBoard { isWinnerPresented = true }
                 .alignmentPosition(.bottom)
         }
-        .modifier(AppBackground(.Thunderstorm.background))
         .pauseSheet(isPresented: $isPausePresented) {
             isPausePresented = false
             isHowToPresented = true

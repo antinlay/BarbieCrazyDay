@@ -16,7 +16,9 @@ public struct AppBackground: ViewModifier {
     
     public func body(content: Content) -> some View {
         content
-            .background { Image(imageResource).resizable().ignoresSafeArea() }
+        Image(imageResource)
+            .resizable()
+            .ignoresSafeArea()
     }
 }
 
@@ -141,4 +143,10 @@ extension View {
     public var timeBoardBackground: some View { modifier(TimeBoardBackground()) }
 
     public func strokeText(width: Double, color: Color) -> some View {  modifier(StrokeText(width: width, color: color)) }
+    
+    func fullScreenBackground(_ imageResouce: ImageResource) -> some View {
+        EmptyView()
+            .modifier(AppBackground(imageResouce))
+    }
+
 }

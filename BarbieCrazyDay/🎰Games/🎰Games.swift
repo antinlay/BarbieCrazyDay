@@ -12,6 +12,7 @@ struct Games: View {
     
     var body: some View {
         ZStack {
+            fullScreenBackground(.Menu.background)
             HStack {
                 HomeButon(action: {  router.navigate(to: GameViews.menu) })
                 .padding(.leading)
@@ -46,7 +47,7 @@ struct Games: View {
             .padding(.leading, 24)
             .alignmentPosition(.bottomLeading)
 
-        }.modifier(AppBackground(.Menu.background))
+        }
     }
 }
 

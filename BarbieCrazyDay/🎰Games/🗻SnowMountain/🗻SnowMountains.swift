@@ -29,6 +29,7 @@ struct SnowMountains: View {
     
     var body: some View {
         ZStack {
+            fullScreenBackground(.Mountains.background)
             Group {
                 HStack(spacing: 0) {
                     PauseButton { isPausePresented = true }
@@ -44,7 +45,7 @@ struct SnowMountains: View {
             .alignmentPosition(.top)
             BetBoard { isWinnerPresented = true }
                 .alignmentPosition(.bottom)
-        }.modifier(AppBackground(.Mountains.background))
+        }
             .pauseSheet(isPresented: $isPausePresented) {
                 isPausePresented = false
                 isHowToPresented = true

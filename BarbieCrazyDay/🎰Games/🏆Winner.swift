@@ -27,6 +27,7 @@ struct Winner: View {
     
     var body: some View {
         ZStack {
+            fullScreenBackground(background)
             Image(.SunnyDay.confetti)
                 .alignmentPosition(.top)
                 .ignoresSafeArea()
@@ -43,7 +44,7 @@ struct Winner: View {
             Image(.Stories.barbie)
                 .alignmentPosition(.bottomLeading)
                 .ignoresSafeArea()
-        }.modifier(AppBackground(background))
+        }
     }
 }
 
