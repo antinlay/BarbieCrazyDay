@@ -10,12 +10,24 @@ import SwiftUI
 struct GameMenu: View {
     @EnvironmentObject private var router: Router
     @EnvironmentObject private var defaultStorage: DefaultStorage
-    
+                
     var body: some View {
         ZStack {
             fullScreenBackground(.Welcome.background)
             barbie
             levelBoard
+            VStack(alignment: .trailing) {
+                HStack {
+                    InfoButton { router.navigate(to: GameViews.info) }
+                        .padding(.leading)
+                    Spacer()
+                    Wallet()
+                        .padding(.trailing)
+                }
+                TimeBoard()
+                    .padding(.trailing)
+            }
+            .alignmentPosition(.topLeading)
             
             HStack(alignment: .bottom) {
                 Button {
@@ -45,20 +57,6 @@ struct GameMenu: View {
             }
             .padding(.horizontal, 24)
             .padding(.bottom, -100)
-            
-            VStack(alignment: .trailing) {
-                HStack {
-                    InfoButton { router.navigate(to: GameViews.info) }
-                        .padding(.leading)
-                    Spacer()
-                    Wallet()
-                        .padding(.trailing)
-                }
-                TimeBoard()
-                    .padding(.trailing)
-            }
-            .alignmentPosition(.top).padding(.top)
-            
         }
     }
     
@@ -67,10 +65,10 @@ struct GameMenu: View {
             .alignmentPosition(.bottomLeading)
             .padding(.leading)
     }
-    
+        
     private var barbie: some View {
         Image(.Menu.barbie)
-            .alignmentPosition(.bottomLeading).ignoresSafeArea()
+            .alignmentPosition(.bottomLeading)
     }
 }
 
