@@ -73,10 +73,10 @@ struct Shop: View {
     var body: some View {
         ZStack {
             fullScreenBackground(.Shop.background)
-            header
-                .alignmentPosition(.top)
             VStack(spacing: 4) {
                 Image(.Shop.barbie)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
                 gameBoard
                     .padding(.top, -75)
                 ChestGame(start: $startGame)
@@ -84,6 +84,8 @@ struct Shop: View {
             }
             .alignmentPosition(.bottom)
             .padding(.bottom, 40)
+            header
+                .alignmentPosition(.top)
         }
     }
 }

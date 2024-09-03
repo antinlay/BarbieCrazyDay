@@ -64,56 +64,55 @@ struct SunnyDay: View {
     var body: some View {
         ZStack {
             fullScreenBackground(.SunnyDay.background)
-            HStack {
-                Group {
+            VStack {
+                HStack {
                     PauseButton { isPausePresented = true }
+                        .textOnBoardStyle
+                        .padding(.leading)
+                    Spacer()
+                    Wallet()
+                        .padding(.trailing)
                 }
-                .textOnBoardStyle
-                .padding(.leading)
+                betMultipluy
                 Spacer()
-                Wallet()
-                    .padding(.trailing)
-            }
-            .alignmentPosition(.top)
-            betMultipluy
-                .alignmentPosition(.top)
-                .padding(.top, 45)
-            Image(.SunnyDay.casinoBoard)
-                .overlay(alignment: .bottom) {
-                    HStack(spacing: -50) {
-                        ForEach(Array(SunnyDayCases.allCases.enumerated()), id: \.offset) { index, step in
-                            ZStack {
-                                stepScore(step)
-                                    .padding(.top, -63)
-                                    .alignmentPosition(.top)
-                                nextStep
-                                    .padding(.top, -30)
-                                    .opacity(step == stepSpin ? 1 : 0)
-                                    .opacity(betModel.isGameStarted ? 1 : 0)
-                                VStack(spacing: 0) {
-                                    SpinItems(stepSpin: $stepSpin) { }
-                                        .disabled(step != stepSpin)
-                                        .opacity(step == stepSpin ? 1 : 0.65)
-                                        .disabled(!betModel.isGameStarted)
-                                    spinNumber(index)
-                                        .padding(.bottom, -15)
+                Image(.SunnyDay.casinoBoard)
+                    .overlay(alignment: .bottom) {
+                        HStack(spacing: -50) {
+                            ForEach(Array(SunnyDayCases.allCases.enumerated()), id: \.offset) { index, step in
+                                ZStack {
+                                    stepScore(step)
+                                        .padding(.top, -63)
+                                        .alignmentPosition(.top)
+                                    nextStep
+                                        .padding(.top, -30)
+                                        .opacity(step == stepSpin ? 1 : 0)
+                                        .opacity(betModel.isGameStarted ? 1 : 0)
+                                    VStack(spacing: 0) {
+                                        SpinItems(stepSpin: $stepSpin) { }
+                                            .disabled(step != stepSpin)
+                                            .opacity(step == stepSpin ? 1 : 0.65)
+                                            .disabled(!betModel.isGameStarted)
+                                        spinNumber(index)
+                                            .padding(.bottom, -15)
+                                    }
                                 }
                             }
                         }
+                        .padding(.bottom, 10)
                     }
-                    .padding(.bottom, 10)
-                }
+                Spacer()
+            }
             BetBoard { isWinnerPresented = true }
-                .alignmentPosition(.bottom)
+                .frame(maxHeight: .infinity, alignment: .bottom)
         }
-            .pauseSheet(isPresented: $isPausePresented) {
-                isPausePresented = false
-                isHowToPresented = true
-            }
-            .howToSheet(isPresented: $isHowToPresented, title: SunnyDay.howToTitle, text: SunnyDay.howToText)
-            .fullScreenCover(isPresented: $isWinnerPresented) {
-                Winner(background: .SunnyDay.background, winnerCase: .victory)
-            }
+        .pauseSheet(isPresented: $isPausePresented) {
+            isPausePresented = false
+            isHowToPresented = true
+        }
+        .howToSheet(isPresented: $isHowToPresented, title: SunnyDay.howToTitle, text: SunnyDay.howToText)
+        .fullScreenCover(isPresented: $isWinnerPresented) {
+            Winner(background: .SunnyDay.background, winnerCase: .victory)
+        }
     }
 }
 

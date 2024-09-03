@@ -23,6 +23,7 @@ struct Story: View {
                         Text(storyModel.title.uppercased())
                             .font(.cherryBombOne(.regular, size: 25))
                             .foregroundColor(.accent)
+                            .multilineTextAlignment(.center)
                             .padding(.bottom, 5)
                         Text(storyModel.text[index]).tag(index)
                             .textOnBoardStyle
@@ -32,13 +33,12 @@ struct Story: View {
                     }
                     .padding(.horizontal, 10)
                 }
-                .alignmentPosition(.top)                
             }
         }
         .boardBackground
         .padding(.horizontal, 15)
-        .padding(.top, 100)
-        .padding(.bottom, 70)
+        .padding(.top)
+        .padding(.bottom)
         .tabViewStyle(.page(indexDisplayMode: .always))
     }
     
@@ -47,42 +47,53 @@ struct Story: View {
             fullScreenBackground(storyModel.background)
             switch isShowingOptions {
             case true:
-                gameStory
-                lady
-                ChooseOneButton {
-                    withAnimation {
-                        selectedOption = storyModel.options.randomElement()!
+                VStack {
+                    ZStack {
+                        PauseButton { isPausePresented = true }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.leading)
+                        ChooseOneButton {
+                            withAnimation {
+                                selectedOption = storyModel.options.randomElement()!
+                            }
+                        }
                     }
-                }
-                .alignmentPosition(.top)
-                .padding(.top, 2)
-                NavigationLink {
-                    StoryResult(selectedOption: selectedOption, storyModel: storyModel)
-                } label: {
-                    Image(.Stories.continueButton)
-                }
-                .disabled(selectedOption.key.isEmpty)
-                .alignmentPosition(.bottomTrailing)
-                .padding(.trailing)
+                    .padding(.bottom)
+
+                    gameStory
+                    ZStack(alignment: .bottomTrailing) {
+                        lady
+                        NavigationLink {
+                            StoryResult(selectedOption: selectedOption, storyModel: storyModel)
+                        } label: {
+                            Image(.Stories.continueButton)
+                        }
+                        .disabled(selectedOption.key.isEmpty)
+                        .padding()
+                    }
+                }.ignoresSafeArea(edges: .bottom)
+                
             case false:
-                preGameStory
-                ContinueButton {
-                    withAnimation {
-                        isShowingOptions = true
+                VStack {
+                    PauseButton { isPausePresented = true }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.leading)
+                    preGameStory
+                    ContinueButton {
+                        withAnimation {
+                            isShowingOptions = true
+                        }
                     }
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                                        .padding(.trailing)
+                    .opacity(selectedTab == storyModel.text.count - 1 ? 1 : 0)
                 }
-                .alignmentPosition(.bottomTrailing)
-                .padding(.trailing)
-                .opacity(selectedTab == storyModel.text.count - 1 ? 1 : 0)
             }
-            PauseButton { isPausePresented = true }
-                .alignmentPosition(.topLeading)
-                .padding(.leading)
             
         }
         .fullScreenCover(isPresented: $isPausePresented) {
-                pauseSheet
-                    .presentationBackground(.ultraThinMaterial)
+            pauseSheet
+                .presentationBackground(.ultraThinMaterial)
         }
         .navigationBarBackButtonHidden()
     }
@@ -104,25 +115,28 @@ struct Story: View {
     private var gameStory: some View {
         VStack {
             ForEach(storyModel.options.keys.sorted(), id: \.self) { option in
-                Text(option)
-                    .padding(.horizontal, 10)
-                    .textOnBoardStyle
-                    .boardBackground
-                    .padding(.horizontal, 20)
-                    .padding(.bottom, 10)
-                    .scaleEffect(selectedOption.key == option ? 1.05 : 1)
-                    .onTapGesture {
-                        withAnimation {
-                            selectedOption = (key: option, value: storyModel.options[option] ?? "")
-                        }
+                ScrollView {
+                    Text(option)
+                        .padding(.horizontal, 10)
+                        .textOnBoardStyle
+                }
+                .boardBackground
+                .padding(.horizontal, 20)
+                .padding(.bottom, 2)
+                .scaleEffect(selectedOption.key == option ? 1.05 : 1)
+                .onTapGesture {
+                    withAnimation {
+                        selectedOption = (key: option, value: storyModel.options[option] ?? "")
                     }
+                }
             }
-        }.alignmentPosition(.top)
-            .padding(.top, 60)
+        }
     }
     
     private var lady: some View {
-        Image(.Stories.lady).alignmentPosition(.bottomLeading).ignoresSafeArea()
+        Image(.Stories.lady)
+            .resizable()
+            .aspectRatio(contentMode: .fit)
     }
     
 }

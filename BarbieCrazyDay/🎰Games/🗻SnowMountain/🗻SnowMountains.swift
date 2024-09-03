@@ -16,7 +16,7 @@ struct SnowMountains: View {
     @State private var isWinnerPresented = false
     @State private var isPausePresented = false
     @State private var isHowToPresented = false
-    @State private var isDifficultPresented = true
+    @State private var isDifficultPresented = false
     
     private var changeLevel: some View {
         Button {
@@ -30,34 +30,40 @@ struct SnowMountains: View {
     var body: some View {
         ZStack {
             fullScreenBackground(.Mountains.background)
-            Group {
-                HStack(spacing: 0) {
-                    PauseButton { isPausePresented = true }
-                        .padding(.leading)
-                    changeLevel
-                    Spacer()
-                    Wallet()
-                        .padding(.trailing)
+            ScrollView(showsIndicators: false) {
+                ScrollViewReader { proxy in
+                    gameGrid
+                        .padding(.top, 65)
+                        .padding(.bottom, 65)
+                        .onChange(of: betModel.isGameStarted) {newValue in
+                            if newValue { proxy.scrollTo(7) }
+                        }
                 }
-                gameGrid
-                    .padding(.top, -65)
             }
-            .alignmentPosition(.top)
+            
+            HStack(spacing: 0) {
+                PauseButton { isPausePresented = true }
+                    .padding(.leading)
+                changeLevel
+                Spacer()
+                Wallet()
+                    .padding(.trailing)
+            }.alignmentPosition(.top)
             BetBoard { isWinnerPresented = true }
                 .alignmentPosition(.bottom)
         }
-            .pauseSheet(isPresented: $isPausePresented) {
-                isPausePresented = false
-                isHowToPresented = true
-            }
-            .howToSheet(isPresented: $isHowToPresented, title: SnowMountains.howToTitle, text: SnowMountains.howToText)
-            .fullScreenCover(isPresented: $isDifficultPresented) {
-                difficultLevel
-                    .presentationBackground(.ultraThinMaterial)
-            }
-            .fullScreenCover(isPresented: $isWinnerPresented) {
-                Winner(background: .SunnyDay.background, winnerCase: .victory)
-            }
+        .pauseSheet(isPresented: $isPausePresented) {
+            isPausePresented = false
+            isHowToPresented = true
+        }
+        .howToSheet(isPresented: $isHowToPresented, title: SnowMountains.howToTitle, text: SnowMountains.howToText)
+        .fullScreenCover(isPresented: $isDifficultPresented) {
+            difficultLevel
+                .presentationBackground(.ultraThinMaterial)
+        }
+        .fullScreenCover(isPresented: $isWinnerPresented) {
+            Winner(background: .SunnyDay.background, winnerCase: .victory)
+        }
     }
     
     private var gameGrid: some View {

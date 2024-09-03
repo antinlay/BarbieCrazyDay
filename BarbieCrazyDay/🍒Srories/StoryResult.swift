@@ -14,40 +14,42 @@ struct StoryResult: View {
     var storyModel: StoryModel
     
     @ViewBuilder private var goodJob: some View {
-        Image(storyModel.gift)
-            .padding(.trailing, -40)
-            .alignmentPosition(.topTrailing)
         VStack(alignment: .trailing) {
-            Text(selectedOption.value)
-                .textOnBoardStyle
-                .boardBackground
-                .padding(.horizontal)
-            Image(.Stories.greatJob)
-                .overlay {
-                    VStack(spacing: -4) {
-                        VStack(spacing: -10) {
-                            Text("Great job!".uppercased())
-                            Text("You nailed it!".uppercased())
+            Image(storyModel.gift)
+                .padding(.trailing, -40)
+            VStack(alignment: .trailing) {
+                Text(selectedOption.value)
+                    .textOnBoardStyle
+                    .boardBackground
+                    .padding(.horizontal)
+                Image(.Stories.greatJob)
+                    .overlay {
+                        VStack(spacing: -4) {
+                            VStack(spacing: -10) {
+                                Text("Great job!".uppercased())
+                                Text("You nailed it!".uppercased())
+                            }
+                            .multilineTextAlignment(.center)
+                            .font(.cherryBombOne(.regular, size: 20))
+                            HStack {
+                                Text(storyModel.reward, format: .number)
+                                    .font(.cherryBombOne(.regular, size: 30))
+                                    .padding(.bottom, 8)
+                                Image(.Stories.almaz)
+                            }
                         }
-                        .multilineTextAlignment(.center)
-                        .font(.cherryBombOne(.regular, size: 20))
-                        HStack {
-                            Text(storyModel.reward, format: .number)
-                                .font(.cherryBombOne(.regular, size: 30))
-                                .padding(.bottom, 8)
-                            Image(.Stories.almaz)
-                        }
+                        .foregroundStyle(.level)
                     }
-                    .foregroundStyle(.level)
-                }
-        }
-        .padding(.top, 100)
-        .alignmentPosition(.top)
-        Image(.Stories.barbie)
-            .alignmentPosition(.bottomLeading).ignoresSafeArea()
-            .onAppear {
-                levelUp()
             }
+            .padding(.top, -100)
+            Spacer()
+            LongHomeButon { router.navigate(to: .menu) }
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                .padding(.trailing)
+        }
+        .onAppear {
+            levelUp()
+        }
     }
     
     var body: some View {
@@ -57,15 +59,14 @@ struct StoryResult: View {
             fullScreenBackground(storyModel.background)
             switch isRightOption {
             case true:
+                Image(.Stories.barbie)
+                    .alignmentPosition(.bottomLeading).ignoresSafeArea()
                 goodJob
             case false:
                 niceTry
                     .alignmentPosition(.top)
                     .padding(.top, 61)
             }
-            LongHomeButon { router.navigate(to: .menu) }
-                .alignmentPosition(.bottomTrailing)
-                .padding(.trailing)
         }
         .navigationBarBackButtonHidden()
     }
@@ -79,11 +80,17 @@ struct StoryResult: View {
     private var niceTry: some View {
         VStack {
             Image(.Stories.niceTry)
-            Text(selectedOption.value)
-                .padding(5)
-                .textOnBoardStyle
-                .boardBackground
-                .padding(.horizontal)
+            ScrollView {
+                Text(selectedOption.value)
+                    .padding(5)
+            }
+            .textOnBoardStyle
+            .boardBackground
+            .padding(.horizontal)
+            Spacer()
+            LongHomeButon { router.navigate(to: .menu) }
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                .padding(.trailing)
         }
     }
 }

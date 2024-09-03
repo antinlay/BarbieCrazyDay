@@ -13,40 +13,46 @@ struct Games: View {
     var body: some View {
         ZStack {
             fullScreenBackground(.Menu.background)
-            HStack {
-                HomeButon(action: {  router.navigate(to: GameViews.menu) })
-                .padding(.leading)
-                Spacer()
-                Wallet()
-                    .padding(.trailing)
-            }
-            .alignmentPosition(.top)
-            Image(.Games.barbie)
-                .alignmentPosition(.bottomTrailing)
-                .ignoresSafeArea()
+            
             VStack(alignment: .leading) {
-                Button {
-                    router.navigate(to: GameViews.sunnyDay)
-                } label: {
-                    Image(.Games.sunnyDayButton)
+                HStack {
+                    HomeButon {  router.navigate(to: GameViews.menu) }
+                        .padding(.leading)
+                    Spacer()
+                    Wallet()
+                        .padding(.trailing)
                 }
-                Button {
-                    router.navigate(to: GameViews.mountains)
-                } label: {
-                    Image(.Games.snowButton)
-                        .padding(.leading, 28)
-                }
-
-                Button {
-                    router.navigate(to: GameViews.thundershtorm)
-                } label: {
-                    Image(.Games.thanderStormButton)
+                Spacer()
+                ZStack {
+                    Image(.Games.barbie)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(maxWidth: .infinity, alignment: .bottomTrailing)
+                        .ignoresSafeArea(edges: .bottom)
+                    VStack(alignment: .leading) {
+                        Button {
+                            router.navigate(to: GameViews.sunnyDay)
+                        } label: {
+                            Image(.Games.sunnyDayButton)
+                        }
+                        Button {
+                            router.navigate(to: GameViews.mountains)
+                        } label: {
+                            Image(.Games.snowButton)
+                                .padding(.leading, 28)
+                        }
+                        
+                        Button {
+                            router.navigate(to: GameViews.thundershtorm)
+                        } label: {
+                            Image(.Games.thanderStormButton)
+                        }
+                    }
+                    .frame(maxWidth: .infinity, alignment: .bottomLeading)
+                    .padding(.horizontal, 24)
+                    .offset(y: 90)
                 }
             }
-            .padding(.bottom, 74)
-            .padding(.leading, 24)
-            .alignmentPosition(.bottomLeading)
-
         }
     }
 }
