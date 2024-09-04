@@ -84,6 +84,9 @@ struct BetBoardSunnyDay: View {
                 actionButtonDisabled = false
             }
         }
+        .onDisappear {
+            betModel.reset()
+        }
     }
     
     private var dealButton: some View {

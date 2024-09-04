@@ -75,6 +75,9 @@ struct BetBoard: View {
                 actionButtonDisabled = false
             }
         }
+        .onDisappear {
+            betModel.reset()
+        }
     }
     
     private var gameDescription: some View {
