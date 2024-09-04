@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ChestGame: View {
-    @AppStorage(DefaultStorage.Key.wallet.rawValue) private var wallet = 10_000
+    @EnvironmentObject private var betModel: BetModel
     @Binding var start: Bool
     @State private var isRewardShowing = false
     @State private var chests: [ImageResource] = [.Shop.chest1, .Shop.chest2, .Shop.chest3]
@@ -16,9 +16,8 @@ struct ChestGame: View {
     
     private func rewardButton(_ chest: ImageResource, rewardRandom: Int) -> some View {
         Button {
-            print(chest, rewardRandom)
             withAnimation {
-                wallet += rewardRandom
+                betModel.deposit(amount: rewardRandom)
                 isRewardShowing = true
                 start = false
             }

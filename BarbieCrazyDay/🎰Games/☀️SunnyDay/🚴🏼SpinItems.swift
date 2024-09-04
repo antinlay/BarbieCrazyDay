@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct SpinItems: View {
+    var index: Int
     @Binding var stepSpin: SunnyDayCases
+    @Binding var isSpin: Bool
     @EnvironmentObject private var betModel: BetModel
-    var action: () -> Void
     @State private var items: [ImageResource] = []
     @State private var spinOffset: Double = 0
     @State private var isDisabled = false
@@ -25,34 +26,38 @@ struct SpinItems: View {
             }
         }
         .frame(height: 190)
-        .onTapGesture {
-            isDisabled = true
-            withAnimation(.bouncy(duration: 2)) {
-                spinOffset = -2239
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                withAnimation {
-                    if items.suffix(5).prefix(3).contains(stepSpin.item) {
-                        betModel.raiseCoefficient(coefficient: stepSpin.coefficient)
-                        stepSpin = stepSpin.next
-                    } else {
-                        betModel.raiseCoefficient(coefficient: 0)
-                        stepSpin = .first
+        .onChange(of: isSpin) { newValue in
+            if newValue, index == stepSpin.step {
+                reset()
+                withAnimation(.bouncy(duration: 2)) {
+                    spinOffset = -2239
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    withAnimation {
+                        if items.suffix(5).prefix(3).contains(stepSpin.item) {
+                            betModel.multiplyNumber += stepSpin.coefficient
+                            betModel.stepSpin = stepSpin.next.step
+                        } else {
+                            betModel.raiseCoefficient(coefficient: 0)
+                            stepSpin = .first
+                        }
+                        isSpin = false
                     }
-                    action()
                 }
             }
         }
-        .disabled(isDisabled)
         .onChange(of: betModel.isGameStarted) { newValue in
             if newValue {
-                withAnimation(.bouncy(duration: 1)) {
-                    spinOffset = 0
-                    items = randomArray
-                    isDisabled = false
-                }
+                reset()
             }
         }
+    }
+    
+    private func reset() {
+        //        withAnimation(.bouncy(duration: 1)) {
+        spinOffset = 0
+        items = randomArray
+        //        }
     }
     
     private var randomArray: [ImageResource] {
@@ -64,8 +69,6 @@ struct SpinItems: View {
 }
 
 #Preview {
-    SpinItems(stepSpin: .constant(.first)) {
-        
-    }
+    SpinItems(index: 0, stepSpin: .constant(.first), isSpin: .constant(.random()))
     .environmentObject(BetModel())
 }

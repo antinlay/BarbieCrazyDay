@@ -27,6 +27,58 @@ public struct BetActionButton: View {
     }
 }
 
+public struct BetSpinButton: View {
+    var actionText: String
+    var action: () -> Void
+    
+    public var body: some View {
+        Button {
+            action()
+        } label: {
+            Image(.SunnyDay.actionButton)
+                .overlay(alignment: .top) {
+                    Text(actionText)
+                        .font(.cherryBombOne(.regular, size: 20))
+                        .foregroundStyle(.spinButton)
+                        .shadow(color: .fontShadow, radius: 4, x: 0, y: 4)
+                        .padding(.top, 6)
+                }
+        }
+    }
+}
+
+public struct BetDealButton: View {
+    var actionText: String
+    var action: () -> Void
+    
+    public var body: some View {
+        Button {
+            action()
+        } label: {
+            Image(.SunnyDay.dealButton)
+                .overlay {
+                    Text(actionText)
+                        .font(.cherryBombOne(.regular, size: 20))
+                        .foregroundStyle(.white)
+                        .shadow(color: .fontShadow, radius: 4, x: 0, y: 4)
+                }
+        }
+    }
+}
+
+public struct BetTakeButton: View {
+    var action: () -> Void
+    
+    public var body: some View {
+        Button {
+            action()
+        } label: {
+            Image(.SunnyDay.takeButton)
+        }
+    }
+}
+
+
 public struct HomeButon: View {
     var action: () -> Void
     

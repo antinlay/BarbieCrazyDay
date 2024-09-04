@@ -8,11 +8,12 @@
 import SwiftUI
 
 final class BetModel: ObservableObject {
-    @AppStorage(DefaultStorage.Key.wallet.rawValue) private var wallet = 10_000
-    @AppStorage(DefaultStorage.Key.level.rawValue) private var level = 1
+    @AppStorage(DefaultStorage.Key.wallet.rawValue) var wallet = 10_000
+    @AppStorage(DefaultStorage.Key.level.rawValue) var level = 1
     @Published var isGameStarted = false
     @Published var bet: Int?
     @Published var multiplyNumber: Double = 0
+    @Published var stepSpin: Int = 1
     
     var minBet = 1000
     var maxBet = 10_000
@@ -28,6 +29,8 @@ final class BetModel: ObservableObject {
         if let bet = bet, bet <= wallet {
             wallet -= bet
             isGameStarted = true
+        } else {
+            reset()
         }
     }
     
@@ -39,9 +42,19 @@ final class BetModel: ObservableObject {
         }
     }
     
+    func deposit(amount: Int) {
+        wallet += amount
+    }
+    
+    func withdrawal(amount: Int) {
+        wallet -= amount
+    }
+
+    
     func reset() {
         isGameStarted = false
         multiplyNumber = 0
         bet = nil
+        stepSpin = 1
     }
 }

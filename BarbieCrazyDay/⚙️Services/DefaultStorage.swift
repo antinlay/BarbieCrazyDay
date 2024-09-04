@@ -12,7 +12,6 @@ extension DefaultStorage {
         case welcome = "WelcomeShowed"
         case wallet = "AmountCoins"
         case reward = "DailyReward"
-        case nowReward = "NowReward"
         case level = "CurrentLevel"
         case available = "AvailableQuests"
         case complete = "CompletedQuests"
@@ -34,15 +33,7 @@ final class DefaultStorage: ObservableObject {
     
     var rewardDate: Date {
         get { defaults.object(forKey: Key.reward.rawValue) as? Date ?? .now }
-        set {
-            defaults.set(newValue, forKey: Key.reward.rawValue)
-            defaults.set(false, forKey: Key.nowReward.rawValue)
-        }
-    }
-    
-    var nowReward: Bool {
-        get { defaults.bool(forKey: Key.nowReward.rawValue) }
-        set { defaults.set(newValue, forKey: Key.nowReward.rawValue) }
+        set { defaults.set(newValue, forKey: Key.reward.rawValue) }
     }
     
     var level: Int {

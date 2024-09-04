@@ -8,18 +8,18 @@
 import SwiftUI
 
 struct RowButtons: View {
+    @Binding var difficult: DifficultyLevelCases
     @Binding var rowIndex: Int
     @EnvironmentObject private var betModel: BetModel
     @State private var isOpen = false
     @State private var items: [ImageResource] = []
-    var difficult: DifficultyLevelCases
     
     var placeholder: ImageResource = .Mountains.actionButton
     
     var action: () -> Void
     
     var body: some View {
-        LazyHStack(spacing: 0) {
+        HStack(spacing: 0) {
             ForEach(items, id: \.self) { item in
                 Button {
                     isOpen = true
@@ -35,11 +35,11 @@ struct RowButtons: View {
                     }
                 } label: {
                     ZStack {
-                        Group{
-                            Image(item)
-                        }
-                        .opacity(isOpen ? 1 : 0)
+                        Image(item)
+                            .opacity(isOpen ? 1 : 0)
                         Image(placeholder)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
                             .opacity(isOpen ? 0 : 1)
                     }
                     .scaleEffect(isOpen ? 1.3 : 1)
@@ -47,19 +47,29 @@ struct RowButtons: View {
                 .disabled(isOpen)
             }
         }
+        .onChange(of: difficult) { _ in
+            fillingItems()
+        }
+        .onAppear {
+            fillingItems()
+        }
         .onChange(of: betModel.isGameStarted) { newValue in
-            withAnimation(.bouncy) {
-                items = difficult.items
-            }
+            fillingItems()
             if !newValue {
                 isOpen = false
             }
         }
     }
+    
+    private func fillingItems() {
+        withAnimation(.bouncy) {
+            items = difficult.items
+        }
+    }
 }
 
 #Preview {
-    RowButtons(rowIndex: .constant(0), difficult: .easy) {
+    RowButtons(difficult: .constant(.easy), rowIndex: .constant(0)) {
         
     }
     .environmentObject(BetModel())

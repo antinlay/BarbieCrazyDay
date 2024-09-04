@@ -16,7 +16,7 @@ struct SnowMountains: View {
     @State private var isWinnerPresented = false
     @State private var isPausePresented = false
     @State private var isHowToPresented = false
-    @State private var isDifficultPresented = false
+    @State private var isDifficultPresented = true
     
     private var changeLevel: some View {
         Button {
@@ -27,20 +27,33 @@ struct SnowMountains: View {
         .disabled(betModel.isGameStarted)
     }
     
+    private var gameGrid: some View {
+        VStack(spacing: 0) {
+            ForEach(Array(difficultLevelCases.coefficient.enumerated()), id: \.offset) { index, coefficient in
+                RowButtons(difficult: $difficultLevelCases, rowIndex: $rowIndex) {
+                    if rowIndex != 0 {
+                        rowIndex -= 1
+                    } else {
+                        betModel.takeButtonPressed()
+                        isWinnerPresented = true
+                    }
+                }
+                .padding(.vertical, -15)
+                .disabled(!betModel.isGameStarted)
+                .disabled(index < rowIndex)
+                .opacity(index >= rowIndex ? 1 : 0.65)
+            }
+        }
+        .padding(.horizontal)
+        .padding(.top, 55)
+        .padding(.bottom, 125)
+    }
+    
+    
     var body: some View {
         ZStack {
             fullScreenBackground(.Mountains.background)
-            ScrollView(showsIndicators: false) {
-                ScrollViewReader { proxy in
-                    gameGrid
-                        .padding(.top, 65)
-                        .padding(.bottom, 65)
-                        .onChange(of: betModel.isGameStarted) {newValue in
-                            if newValue { proxy.scrollTo(7) }
-                        }
-                }
-            }
-            
+            gameGrid
             HStack(spacing: 0) {
                 PauseButton { isPausePresented = true }
                     .padding(.leading)
@@ -66,24 +79,6 @@ struct SnowMountains: View {
         }
     }
     
-    private var gameGrid: some View {
-        LazyHGrid(rows: Array(repeating: GridItem(.fixed(60)), count: 8)) {
-            ForEach(Array(difficultLevelCases.coefficient.enumerated()), id: \.offset) { index, coefficient in
-                RowButtons(rowIndex: $rowIndex, difficult: difficultLevelCases) {
-                    if rowIndex != 0 {
-                        rowIndex -= 1
-                    } else {
-                        betModel.takeButtonPressed()
-                        isWinnerPresented = true
-                    }
-                }
-                .disabled(!betModel.isGameStarted)
-                .disabled(index < rowIndex)
-                .opacity(index >= rowIndex ? 1 : 0.65)
-            }
-        }
-    }
-    
     private var difficultLevel: some View {
         VStack {
             Text("Select your\ndifficulty\nlevel:".uppercased())
@@ -95,6 +90,7 @@ struct SnowMountains: View {
                 Button {
                     isDifficultPresented = false
                     difficultLevelCases = difficult
+                    isHowToPresented = true
                 } label: {
                     Image(difficult.button)
                 }

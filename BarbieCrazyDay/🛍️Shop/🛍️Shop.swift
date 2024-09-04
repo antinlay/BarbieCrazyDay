@@ -9,7 +9,7 @@ import SwiftUI
 
 struct Shop: View {
     @EnvironmentObject private var router: Router
-    @AppStorage(DefaultStorage.Key.wallet.rawValue) private var wallet = 10_000
+    @EnvironmentObject private var betModel: BetModel
     @State private var price = 250
     @State private var startGame = false
     @State private var isPayDisabled = false
@@ -33,7 +33,7 @@ struct Shop: View {
             withAnimation {
                 isPayDisabled = true
                 startGame = true
-                wallet -= price
+                betModel.withdrawal(amount: price)
             }
         } label: {
             Image(.Shop.buyButton)

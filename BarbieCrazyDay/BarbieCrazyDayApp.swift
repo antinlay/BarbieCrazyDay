@@ -11,7 +11,7 @@ import SwiftUI
 struct BarbieCrazyDayApp: App {
     @StateObject private var router = Router()
     @StateObject private var defaultStorage = DefaultStorage()
-    @StateObject private var betModel = BetModel()
+    @StateObject var betModel = BetModel()
     
     var body: some Scene {
         WindowGroup {

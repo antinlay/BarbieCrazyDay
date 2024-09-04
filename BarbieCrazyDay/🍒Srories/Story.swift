@@ -32,6 +32,7 @@ struct Story: View {
                         }
                     }
                     .padding(.horizontal, 10)
+                    .padding(.bottom, 40)
                 }
             }
         }
@@ -40,6 +41,7 @@ struct Story: View {
         .padding(.top)
         .padding(.bottom)
         .tabViewStyle(.page(indexDisplayMode: .always))
+        .indexViewStyle(.page(backgroundDisplayMode: .interactive))
     }
     
     var body: some View {

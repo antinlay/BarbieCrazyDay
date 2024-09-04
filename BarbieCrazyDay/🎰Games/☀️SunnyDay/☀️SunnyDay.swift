@@ -12,8 +12,22 @@ struct SunnyDay: View {
     
     @State private var isWinnerPresented = false
     @State private var isPausePresented = false
-    @State private var isHowToPresented = false
+    @State private var isHowToPresented = true
     @State private var stepSpin: SunnyDayCases = .first
+    @State private var isSpin: Bool = false
+    
+    private var gameDescription: some View {
+        Group {
+            switch betModel.isGameStarted {
+            case false:
+                Text("place a bet and press deal".uppercased())
+            case true:
+                Text("your current winnings: ".uppercased()) + Text(betModel.currentWinning, format: .number)
+            }
+        }
+        .textOnBoardStyle
+        .shadow(color: .black, radius: 4, x: 0, y: 4)
+    }
     
     private var betMultipluy: some View {
         Group {
@@ -69,41 +83,26 @@ struct SunnyDay: View {
                     PauseButton { isPausePresented = true }
                         .textOnBoardStyle
                         .padding(.leading)
+                    gameDescription
+                        .padding(.leading)
                     Spacer()
                     Wallet()
                         .padding(.trailing)
                 }
                 betMultipluy
-                Spacer()
+                    .padding(.bottom, 56)
                 Image(.SunnyDay.casinoBoard)
                     .overlay(alignment: .bottom) {
-                        HStack(spacing: -50) {
-                            ForEach(Array(SunnyDayCases.allCases.enumerated()), id: \.offset) { index, step in
-                                ZStack {
-                                    stepScore(step)
-                                        .padding(.top, -63)
-                                        .alignmentPosition(.top)
-                                    nextStep
-                                        .padding(.top, -30)
-                                        .opacity(step == stepSpin ? 1 : 0)
-                                        .opacity(betModel.isGameStarted ? 1 : 0)
-                                    VStack(spacing: 0) {
-                                        SpinItems(stepSpin: $stepSpin) { }
-                                            .disabled(step != stepSpin)
-                                            .opacity(step == stepSpin ? 1 : 0.65)
-                                            .disabled(!betModel.isGameStarted)
-                                        spinNumber(index)
-                                            .padding(.bottom, -15)
-                                    }
-                                }
-                            }
-                        }
-                        .padding(.bottom, 10)
+                        casinoBoard
+                            .padding(.bottom, 10)
                     }
+                    .aspectRatio(contentMode: .fit)
                 Spacer()
             }
-            BetBoard { isWinnerPresented = true }
-                .frame(maxHeight: .infinity, alignment: .bottom)
+            BetBoardSunnyDay(stepSpin: $stepSpin, isSpin: $isSpin) {
+                isWinnerPresented = true
+            }
+            .frame(maxHeight: .infinity, alignment: .bottom)
         }
         .pauseSheet(isPresented: $isPausePresented) {
             isPausePresented = false
@@ -112,6 +111,30 @@ struct SunnyDay: View {
         .howToSheet(isPresented: $isHowToPresented, title: SunnyDay.howToTitle, text: SunnyDay.howToText)
         .fullScreenCover(isPresented: $isWinnerPresented) {
             Winner(background: .SunnyDay.background, winnerCase: .victory)
+        }
+    }
+    
+    private var casinoBoard: some View {
+        HStack(spacing: -50) {
+            ForEach(Array(SunnyDayCases.allCases.enumerated()), id: \.offset) { index, step in
+                ZStack {
+                    stepScore(step)
+                        .padding(.top, -63)
+                        .alignmentPosition(.top)
+                    nextStep
+                        .padding(.top, -30)
+                        .opacity(step == stepSpin ? 1 : 0)
+                        .opacity(betModel.isGameStarted ? 1 : 0)
+                    VStack(spacing: 0) {
+                        SpinItems(index: index + 1, stepSpin: $stepSpin, isSpin: $isSpin)
+                            .disabled(step != stepSpin)
+                            .opacity(step == stepSpin ? 1 : 0.65)
+                            .disabled(!betModel.isGameStarted)
+                        spinNumber(index)
+                            .padding(.bottom, -15)
+                    }
+                }
+            }
         }
     }
 }

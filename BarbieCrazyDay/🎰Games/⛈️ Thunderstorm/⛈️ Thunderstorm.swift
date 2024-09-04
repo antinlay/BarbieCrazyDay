@@ -13,7 +13,7 @@ struct Thunderstorm: View {
     
     @State private var isWinnerPresented = false
     @State private var isPausePresented = false
-    @State private var isHowToPresented = false
+    @State private var isHowToPresented = true
     
     @State private var randomNumber = Double.random(in: 3...100)
     @State private var timer: Timer?
